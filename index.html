@@ -245,6 +245,21 @@ nav.tabs button{padding-left:12px;padding-right:12px}
 .hp-ch.on{border-color:var(--accent);background:var(--accent-soft)}
 .hp-ch .d{color:var(--muted);font-size:13px;font-variant-numeric:tabular-nums}
 .tk-edit{white-space:nowrap;padding:5px 10px!important;font-size:12px}
+
+/* ---- AI に聞く ---- */
+.ai-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.ai-chips button{border:1px solid var(--line);background:var(--surface2);color:var(--ink);border-radius:999px;padding:5px 12px;font-size:12px;cursor:pointer}
+.ai-ask{display:flex;gap:8px;align-items:stretch}
+.ai-ask textarea{flex:1;min-width:0;font:inherit;font-size:14px;padding:8px 10px;border:1px solid var(--line);border-radius:6px;background:var(--input-bg);color:var(--ink);resize:vertical}
+.ai-log{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+.ai-q{align-self:flex-end;max-width:85%;background:var(--accent-soft);color:var(--ink);border-radius:12px 12px 2px 12px;padding:8px 12px;font-size:14px;white-space:pre-wrap}
+.ai-a{align-self:flex-start;max-width:95%;background:var(--surface2);border-radius:12px 12px 12px 2px;padding:10px 14px;font-size:14px;line-height:1.7;white-space:pre-wrap}
+.ai-a.err{color:var(--bad);background:var(--bad-soft)}
+.ai-a .ai-meta{display:block;margin-top:6px;font-size:11px;color:var(--muted)}
+.ai-summary{margin-top:12px;background:var(--surface2);border-radius:8px;padding:12px 16px;font-size:14px;line-height:1.75;white-space:pre-wrap}
+.ai-summary .ai-meta{display:block;margin-bottom:6px;font-size:12px;color:var(--muted)}
+#tkLineTable input[type=text]{min-width:160px}
+@media (max-width:600px){.ai-ask{flex-direction:column}}
 </style>
 </head>
 <body>
@@ -291,6 +306,18 @@ nav.tabs button{padding-left:12px;padding-right:12px}
       <span class="msg" id="dashNote"></span>
     </div>
     <div class="kpis" id="kpis"></div>
+    <div class="card" id="aiCard">
+      <h2>AI に聞く <span class="note" id="aiNote">羅針盤のデータ（会員数・新規・退会・チラシ・目標・タスク・大会）をもとに答えます。答えには根拠の月・道場を添えます。数字の最終確認は各タブで。</span></h2>
+      <div class="ai-chips" id="aiChips"></div>
+      <div class="ai-ask"><textarea id="aiQ" rows="2" placeholder="例：先月、退会が多かった道場とその理由は？　／　303名まであと何名？今のペースで届く？"></textarea><button type="button" class="primary" id="aiAskBtn">聞く</button></div>
+      <div class="ai-log" id="aiLog"></div>
+      <div class="actions" style="margin-top:12px;padding-top:12px;border-top:1px solid var(--line)">
+        <button type="button" class="ghost" id="aiSumBtn">表示中の月の要約と理事会コメント案を作る</button>
+        <button type="button" class="ghost" id="aiSumCopy" hidden>要約をコピー</button>
+        <span class="msg" id="aiMsg"></span>
+      </div>
+      <div class="ai-summary" id="aiSummary" hidden></div>
+    </div>
     <div class="card">
       <h2>道場別 当月実績 <span class="note">道場生数は実働会員（在籍 − 休会）で数えます。月会費売上は各道場に帰属。</span></h2>
       <div class="tw"><table id="dashTable"></table></div>
@@ -487,6 +514,14 @@ nav.tabs button{padding-left:12px;padding-right:12px}
       </div>
       <div id="tkAddBox" class="tk-detail" hidden style="padding:12px;border-radius:8px;margin-bottom:12px"></div>
       <div class="tw"><table id="tkTable"></table></div>
+    </div>
+    <div class="card" id="tkLineCard">
+      <h2>LINE 通知（期限切れ・期限が近い未完了タスク） <span class="note">毎朝8時台に、担当者ごとに LINE で届きます（期限超過と、期限まで3日以内）。担当者名が LINE に結びつかないタスクは「管理者」にまとめて届きます。同じ人には1日1回。</span></h2>
+      <div class="banner" id="tkLineStatus"></div>
+      <div class="tw"><table id="tkLineTable"></table></div>
+      <p class="note" style="margin:8px 0 12px">登録のしかた：塚本道場の LINE 公式アカウントを「友だち追加」して、何かメッセージを送ると、この一覧に名前が出ます。ここで「担当者名」にタスクシートの担当（Owner）の表記（例：石川）を入れて保存すると通知が届くようになります。</p>
+      <div class="actions"><button type="button" class="ghost" id="tkLinePreview">今日の通知の下見</button><button type="button" class="primary" id="tkLineSend">今すぐ送る</button><span class="msg" id="tkLineMsg"></span></div>
+      <div id="tkLinePreviewBox" class="tk-detail" hidden style="padding:12px;border-radius:8px;margin-top:12px"></div>
     </div>
   </section>
 
@@ -722,6 +757,7 @@ const API_URL = "https://script.google.com/macros/s/AKfycbziWNY_XnUyTjyz_3PqkA2u
   const TAIKAI_REASONS = ['進学・受験','部活・他の習い事へ','引っ越し・転勤','時間が合わない（仕事・学校）','費用','本人の意欲低下・飽き','けが・体調','家庭の事情','指導・道場の雰囲気','その他・不明'];
   // 新機能のお知らせ（日付から7日間、ダッシュボード上部に表示。×で閉じると再表示しない）
   const RELEASE_NOTES = [
+    {date:'2026-10-15', items:['ダッシュボードに「AI に聞く」を追加：会員数・新規・退会・チラシ・目標・タスクのデータをもとに質問に答え、表示中の月の要約と理事会コメント案も作れます（AI の案なので数字は各タブで確認を）','タスクの期限が過ぎた・3日以内に迫った未完了タスクを、毎朝 LINE で担当者ごとに通知するようにしました（タスクタブの下の「LINE 通知」で、受け取る人の登録と担当者名の設定ができます）']},
     {date:'2026-10-13', items:['ダッシュボードの一番下に「使い方（音声マニュアル）」を表示するようにしました（タブの一番右の「使い方」でも同じものが開きます）','「掲載サイト」タブの候補に「ChatGPT広告」を追加し、各掲載先の料金を10/13に掲載案内ページで確認した内容に直しました（子供の習い事図鑑は無料プランなし・月980円〜、スクルー・スポスルは成果報酬の条件、ほか有料プランの金額）。タブ上部の「調査結果を反映」を押すと入ります。手で書き換えた料金・メモは上書きしません']},
     {date:'2026-10-09', items:['タブの一番右に「使い方」を追加：音声に合わせて画面イメージと字幕が切り替わるマニュアルです（全10章・約7分、続きから再生できます）','タスクタブの各行に「編集」ボタンを追加：押すとその場で全項目を直してシートに保存できます（これまでどおりタスク名を押しても開きます）']},
     {date:'2026-10-07', items:['アプリの名前を「塚本道場羅針盤」に変えました。URL・パスコード・データはこれまでと同じです']},
@@ -803,6 +839,7 @@ const API_URL = "https://script.google.com/macros/s/AKfycbziWNY_XnUyTjyz_3PqkA2u
     portals = Array.isArray(d.portals) ? d.portals : portals; portalResults = Array.isArray(d.portalResults) ? d.portalResults : portalResults;
     ads = Array.isArray(d.ads) ? d.ads : ads; adsDaily = Array.isArray(d.adsDaily) ? d.adsDaily : adsDaily; adsSettings = (d.adsSettings && typeof d.adsSettings==='object') ? d.adsSettings : adsSettings;
     events = Array.isArray(d.events) ? d.events : [];
+    aiInfo = (d.ai && typeof d.ai==='object') ? d.ai : aiInfo; aiSummaries = (d.aiSummaries && typeof d.aiSummaries==='object') ? d.aiSummaries : aiSummaries; linePeople = Array.isArray(d.linePeople) ? d.linePeople : linePeople;
     meta = d.meta && typeof d.meta==='object' ? d.meta : {}; calendarInfo = d.calendar || {configured:false};
     lineInfo = d.line && typeof d.line==='object' ? d.line : {configured:false, groups:[]};
     const next = {}; (d.monthly||[]).forEach(r => { if (r && r.month && r.dojo) next[key(r.month,r.dojo)] = r; });
@@ -849,6 +886,7 @@ const API_URL = "https://script.google.com/macros/s/AKfycbziWNY_XnUyTjyz_3PqkA2u
   let extras = [];    // 追加クラス [{id,name,prices:{dojoId:円},member:0/1,note}]
   let instructors = JSON.parse(JSON.stringify(DEFAULT_INSTRUCTORS)); // 指導員マスタ
   let tournaments = [], tournamentsError = '', news = [], lineInfo = {configured:false, groups:[]}, events = [];
+  let aiInfo = {configured:false, model:''}, aiSummaries = {}, linePeople = [];
   const EVENT_TYPES = ['定例ミーティング','都大会ミーティング','審査会','東京都大会','見学会','イベント参加','合宿・遠征','その他'];
   const NEWS_TYPES = ['ライバル道場','習い事・スクール','学校・園の行事','地域イベント','広告・キャンペーン','その他'];
   let tasksError = '';
@@ -921,6 +959,105 @@ const API_URL = "https://script.google.com/macros/s/AKfycbziWNY_XnUyTjyz_3PqkA2u
       entered: !!rec && CATS.some(([k])=>rec[k]!=null && rec[k]!=='')};
   }
 
+  // ============================================================
+  //  AI に聞く（Apps Script 経由で Claude API を呼ぶ。鍵は Apps Script 側）
+  // ============================================================
+  const AI_CHIPS = ['先月と比べて実働会員はどう動いた？', '退会が多い道場と主な理由は？', '303名まであと何名？今のペースで届く？', 'チラシの反応率が良い道場は？', '期限を過ぎているタスクは？'];
+  let aiHistory = [];
+  /** AI に渡すデータ（表示中の月を中心に、入力のある直近8か月） */
+  function aiContext(){
+    const monthsAll = MONTHS.filter(m => m <= selMonth && DOJOS.some(d => derive(monthly[key(m,d.id)], d.id, m).entered));
+    const months = monthsAll.slice(-8);
+    const dojos = DOJOS.map(d => {
+      const g = goals[d.id] || {};
+      return { 道場: d.name, 本部: !!d.hq, 目標: g.target ? { 目標実働: Number(g.target), 期限: g.deadline||g.targetMonth||'', 起点月: g.baseMonth||'' } : null,
+        月別: months.map(m => { const e = effRec(m, d.id); const v = derive(e.rec, d.id, m); const rec = e.rec||{}; const o = { 月: m, 実働: v.jitsudo, 在籍: v.zaiseki, 休会: Number(rec.kyukai)||0, 新規: v.shinki, 退会: v.taikai, 純増減: v.junzo, 月会費売上: Math.round(v.uriage), チラシ配布: v.chirashi, チラシ経由の新規: Number(rec.shinkiChirashi)||0, 審査会参加: v.shinsa };
+          if (e.carriedFrom) { o.未入力 = true; o.注記 = `${fmtMonth(e.carriedFrom)}の会員数を引き継いだ暫定値`; }
+          else if (!v.entered) { o.未入力 = true; }
+          else { o.新規の経路 = {}; ROUTES.forEach(([k,l]) => { if (Number(rec[k])) o.新規の経路[l] = Number(rec[k]); });
+            if (Array.isArray(rec.taikaiDetail) && rec.taikaiDetail.length) o.退会の内訳 = rec.taikaiDetail.map(r => ({区分:r.cat, 理由:r.reason, 人数:r.n}));
+            if (rec.shinkiDetail && typeof rec.shinkiDetail==='object') o.新規の内訳 = rec.shinkiDetail; }
+          return o; }) };
+    });
+    const today = new Date().toISOString().slice(0,10);
+    const openTasks = tasks.filter(t => t.status !== '完了').map(t => ({ ID:t.id, タスク:t.task, 担当:t.owner, 優先度:t.priority, 状況:t.status, 進捗:t.progress, 期限:t.due, 期限超過: isOverdue(t) }));
+    const up = tournaments.filter(t => ymdNorm(t.end||t.start) >= today).slice(0,10).map(t => ({ 大会:t.name, 日程:t.start, 参加:t.status, 申込締切:t.deadline||'' }));
+    return JSON.stringify({ 今日: today, 表示中の月: selMonth, 数え方: '実働 = 在籍 − 休会。退会率 = 退会 ÷（実働＋退会）', 本部の目標: '野沢道場 2026年7月 実働203名 → 2027年12月末 303名', 道場: dojos, 未完了タスク: openTasks, 今後の大会: up });
+  }
+  function renderAiCard(){
+    const ok = !!aiInfo.configured;
+    $('aiChips').innerHTML = AI_CHIPS.map(q => `<button type="button" data-q="${esc(q)}">${esc(q)}</button>`).join('');
+    $('aiChips').querySelectorAll('button').forEach(b => b.addEventListener('click', () => { $('aiQ').value = b.dataset.q; askAi(); }));
+    $('aiAskBtn').disabled = !ok; $('aiSumBtn').disabled = !ok;
+    $('aiNote').textContent = ok ? '羅針盤のデータ（会員数・新規・退会・チラシ・目標・タスク・大会）をもとに答えます。答えには根拠の月・道場を添えます。数字の最終確認は各タブで。' : 'AI はまだ設定されていません（Apps Script のスクリプトプロパティに ANTHROPIC_KEY を登録すると使えます）。';
+    renderAiSummary();
+  }
+  function renderAiSummary(){
+    const s = aiSummaries[selMonth]; const box = $('aiSummary');
+    $('aiSumBtn').textContent = `${fmtMonth(selMonth)}の要約と理事会コメント案を${s?'作り直す':'作る'}`;
+    box.hidden = !s; $('aiSumCopy').hidden = !s;
+    if (s) box.innerHTML = `<span class="ai-meta">${fmtMonth(selMonth)}の要約　作成 ${esc(s.at)}${s.by?'（'+esc(s.by)+'）':''}　※AI が書いた案です。数字は各タブで確認してから使ってください</span>${esc(s.text)}`;
+  }
+  async function askAi(){
+    const q = $('aiQ').value.trim(); if (!q) return;
+    const log = $('aiLog'); const qEl = document.createElement('div'); qEl.className='ai-q'; qEl.textContent=q; log.appendChild(qEl);
+    const aEl = document.createElement('div'); aEl.className='ai-a'; aEl.textContent='考えています…'; log.appendChild(aEl); aEl.scrollIntoView({block:'nearest'});
+    $('aiAskBtn').disabled = true; $('aiQ').value='';
+    try { const r = await api.post('aiAsk', { question:q, context: aiContext(), history: aiHistory.slice(-3) });
+      aEl.textContent = r.answer; const m=document.createElement('span'); m.className='ai-meta'; m.textContent=`AI（${r.model||''}）の回答。数字は各タブで確認してください`; aEl.appendChild(m);
+      aiHistory.push({q, a:r.answer}); }
+    catch(err){ aEl.className='ai-a err'; aEl.textContent = 'AI に聞けませんでした。' + (err && err.message ? err.message : '時間をおいてもう一度お試しください。'); }
+    finally { $('aiAskBtn').disabled = !aiInfo.configured; }
+  }
+  $('aiAskBtn').addEventListener('click', askAi);
+  $('aiQ').addEventListener('keydown', e => { if ((e.metaKey||e.ctrlKey) && e.key==='Enter') askAi(); });
+  $('aiSumBtn').addEventListener('click', async () => {
+    const msg=$('aiMsg'); msg.className='msg'; msg.textContent='要約を作っています（10〜20秒）…'; $('aiSumBtn').disabled=true;
+    try { const r = await api.post('aiSummary', { month: selMonth, context: aiContext() }); aiSummaries[r.month] = { text:r.text, at:r.at, by:r.by }; msg.className='msg ok'; msg.textContent='作成してスプレッドシート『app_AI要約』に保存しました'; renderAiSummary(); }
+    catch(err){ msg.className='msg err'; msg.textContent = '作れませんでした。' + (err && err.message ? err.message : ''); }
+    finally { $('aiSumBtn').disabled = !aiInfo.configured; }
+  });
+  $('aiSumCopy').addEventListener('click', async () => { const s=aiSummaries[selMonth]; if(!s) return; try { await navigator.clipboard.writeText(`${fmtMonth(selMonth)} 月次要約（塚本道場羅針盤・AI案）\n${s.text}`); $('aiMsg').className='msg ok'; $('aiMsg').textContent='コピーしました'; } catch(e){ $('aiMsg').className='msg err'; $('aiMsg').textContent='コピーできませんでした'; } });
+
+  // ============================================================
+  //  LINE 通知（タスクの期限）
+  // ============================================================
+  function renderTaskLineCard(){
+    const st = $('tkLineStatus'); const tokenOk = !!(lineInfo && lineInfo.hasToken); const n = linePeople.filter(p=>p.active).length;
+    const owners = [...new Set(tasks.filter(t=>t.status!=='完了' && t.due).map(t=>t.owner).filter(Boolean))];
+    const matched = o => linePeople.some(p => p.active && String(p.owner||'').split(/[・,、\/／]/).map(s=>s.trim()).filter(Boolean).some(nm => o.replace(/[\s　]/g,'').includes(nm.replace(/[\s　]/g,''))));
+    const none = owners.filter(o=>!matched(o));
+    st.style.background = tokenOk && n ? 'var(--good-soft)' : 'var(--warn-soft)'; st.style.color = tokenOk && n ? 'var(--good)' : 'var(--warn)';
+    st.innerHTML = (tokenOk ? 'LINE 公式アカウント：設定済み' : 'LINE 公式アカウント：<b>未設定</b>（Apps Script のスクリプトプロパティ LINE_TOKEN が必要です）') + `　／　登録済み ${n}名` +
+      (none.length ? `　／　<b>LINE に結びついていない担当：</b>${esc(none.join('、'))}` : (owners.length ? '　／　期限ありタスクの担当は全員 LINE に結びついています' : ''));
+    const rows = linePeople.map(p => `<tr><td>${esc(p.display)||'<span style="color:var(--muted)">（名前取得できず）</span>'}<div class="note" style="font-size:11px">${esc(p.id.slice(0,6))}…　登録 ${esc(p.at)}</div></td>
+      <td><input type="text" data-lp="${esc(p.id)}" data-k="owner" value="${esc(p.owner)}" placeholder="例：石川（複数は・区切り）"></td>
+      <td style="text-align:center"><input type="checkbox" data-lp="${esc(p.id)}" data-k="admin" ${p.admin?'checked':''}></td>
+      <td style="text-align:center"><input type="checkbox" data-lp="${esc(p.id)}" data-k="active" ${p.active?'checked':''}></td>
+      <td><button type="button" class="ghost tk-edit" data-lpsave="${esc(p.id)}">保存</button></td></tr>`).join('');
+    $('tkLineTable').innerHTML = `<thead><tr><th style="text-align:left">LINE の名前</th><th style="text-align:left">担当者名（タスクの Owner と照合）</th><th>管理者<br><span class="note" style="font-weight:400">全員分のまとめを受け取る</span></th><th>有効</th><th></th></tr></thead><tbody>${rows || '<tr><td colspan="5" style="text-align:center;color:var(--muted)">まだ誰も登録していません。LINE 公式アカウントを友だち追加してメッセージを送ると、ここに出ます</td></tr>'}</tbody>`;
+    $('tkLineTable').querySelectorAll('[data-lpsave]').forEach(b => b.addEventListener('click', async () => {
+      const id=b.dataset.lpsave; const get=k=>$('tkLineTable').querySelector(`[data-lp="${CSS.escape(id)}"][data-k="${k}"]`);
+      const msg=$('tkLineMsg'); msg.className='msg'; msg.textContent='保存中…'; b.disabled=true;
+      try { const r = await api.post('lineSetPerson', { id, owner:get('owner').value.trim(), admin:get('admin').checked, active:get('active').checked }); linePeople = r.people||linePeople; msg.className='msg ok'; msg.textContent='保存しました'; renderTaskLineCard(); }
+      catch(err){ msg.className='msg err'; msg.textContent=errText(err); b.disabled=false; }
+    }));
+  }
+  $('tkLinePreview').addEventListener('click', async () => {
+    const box=$('tkLinePreviewBox'); const msg=$('tkLineMsg'); msg.className='msg'; msg.textContent='確認中…';
+    try { const r = await api.post('previewTaskNotify', {}); msg.textContent='';
+      box.hidden=false; box.innerHTML = `<b>今日通知の対象になるタスク（${r.tasks.length}件）</b>` + (r.tasks.length ? `<ul style="margin:6px 0 0 18px;padding:0">${r.tasks.map(t=>`<li>${esc(t.id)} ${esc(t.task)}　担当 ${esc(t.owner)||'—'}　期限 ${esc(t.due)}（${t.days<0?`${-t.days}日超過`:t.days===0?'本日':`あと${t.days}日`}）</li>`).join('')}</ul>` : '<div class="note">期限超過・3日以内の未完了タスクはありません</div>') +
+        `<div class="note" style="margin-top:8px">LINE：${r.lineConfigured?'設定済み':'未設定'}　／　AI の声かけ文：${r.aiConfigured?'使う':'使わない（定型文）'}　／　受信者 ${r.people.length}名${r.people.length?'（'+r.people.map(p=>esc(p.owner||p.display)+(p.admin?'★':'')).join('、')+'）':''}</div>`; }
+    catch(err){ msg.className='msg err'; msg.textContent=errText(err); }
+  });
+  $('tkLineSend').addEventListener('click', async () => {
+    const msg=$('tkLineMsg'); msg.className='msg'; msg.textContent='送信中…'; $('tkLineSend').disabled=true;
+    try { const r = await api.post('notifyTasksNow', { force:true }); msg.className = r.sent.length ? 'msg ok' : 'msg err';
+      msg.textContent = `対象 ${r.tasks}件。送信：${r.sent.length?r.sent.join('、'):'なし'}${r.skipped.length?'　／　送れず：'+r.skipped.join('、'):''}${r.unmatched.length?'　／　LINE未登録の担当：'+r.unmatched.map(u=>u.owner).join('、'):''}`; }
+    catch(err){ msg.className='msg err'; msg.textContent=errText(err); }
+    finally { $('tkLineSend').disabled=false; }
+  });
+
   // ---------- tabs ----------
   document.querySelectorAll('nav.tabs button').forEach(b => b.addEventListener('click', () => {
     document.querySelectorAll('nav.tabs button').forEach(x=>x.setAttribute('aria-selected', String(x===b)));
@@ -931,7 +1068,7 @@ const API_URL = "https://script.google.com/macros/s/AKfycbziWNY_XnUyTjyz_3PqkA2u
     if (b.dataset.tab==='trend') renderTrend();
     if (b.dataset.tab==='flyer') renderFlyers();
     if (b.dataset.tab==='sched') renderSched();
-    if (b.dataset.tab==='tasks') renderTasks();
+    if (b.dataset.tab==='tasks'){ renderTasks(); renderTaskLineCard(); }
     if (b.dataset.tab==='tour') renderTour();
     if (b.dataset.tab==='news') renderNews();
   }));
@@ -943,7 +1080,7 @@ const API_URL = "https://script.google.com/macros/s/AKfycbziWNY_XnUyTjyz_3PqkA2u
   }
   fillMonthSelect($('dashMonth'), selMonth);
   let monthTouched = false;
-  $('dashMonth').addEventListener('change', e => { selMonth = e.target.value; monthTouched = true; renderDash(); });
+  $('dashMonth').addEventListener('change', e => { selMonth = e.target.value; monthTouched = true; renderDash(); renderAiSummary(); });
   // 未操作なら、登録がある最新の月を自動で表示する
   function autoSelectMonth(){
     if (monthTouched) return;
@@ -2517,7 +2654,7 @@ const API_URL = "https://script.google.com/macros/s/AKfycbziWNY_XnUyTjyz_3PqkA2u
     $('newsTable').querySelectorAll('button[data-ndel]').forEach(b=>b.addEventListener('click', async ()=>{ if(!confirm('この情報を削除しますか？')) return; try { await api.post('deleteNews',{id:b.dataset.ndel}); news=news.filter(n=>n.id!==b.dataset.ndel); renderNews(); } catch(err){ alert(errText(err)); } }));
   }
 
-  function renderAll(){ renderReleaseBanner(); renderDash(); renderMatrix(); if(!$('tab-trend').hidden) renderTrend(); if(!$('tab-flyer').hidden) renderFlyers(); }
+  function renderAll(){ renderReleaseBanner(); renderDash(); renderMatrix(); renderAiCard(); if(!$('tab-tasks').hidden) renderTaskLineCard(); if(!$('tab-trend').hidden) renderTrend(); if(!$('tab-flyer').hidden) renderFlyers(); }
 
   // ---------- boot ----------
   renderRates(); renderExtras(); renderInstructors(); renderGoals(); loadForm(); renderAll(); renderFlyers();
