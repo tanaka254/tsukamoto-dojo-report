@@ -111,6 +111,14 @@ svg.chart{width:100%;height:auto;display:block}
 .hint{font-size:13px;color:var(--muted);margin:0 0 12px}
 [hidden]{display:none !important}
 .rel-wrap{margin-bottom:12px}
+.tk-owners{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center}
+.tk-own{display:inline-flex;align-items:center;gap:4px;font-size:13px;padding:4px 10px;border:1px solid var(--line);border-radius:999px;background:var(--surface);cursor:pointer;white-space:nowrap}
+.tk-own:has(input:checked){background:var(--accent-soft);border-color:var(--accent)}
+.tk-own-other{min-width:180px;flex:1}
+.hp-page{margin-top:22px}
+.hp-page-btn{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline;width:100%;text-align:left;background:none;border:0;padding:2px 0;font:inherit;font-size:15px;font-weight:600;color:var(--accent);cursor:pointer}
+.hp-page-btn .note{font-weight:400;font-size:12px;color:var(--muted)}
+.hp-page #hpCard{margin:12px 0 0;border:0;padding:0;box-shadow:none}
 .in-jump{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
 .in-jump a{font-size:13px;padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--ink);text-decoration:none}
 .in-jump a:hover{border-color:var(--accent)}
@@ -796,7 +804,7 @@ nav.tabs button{padding-left:12px;padding-right:12px}
   <!-- ===== 使い方（音声マニュアル） ===== -->
   <section id="tab-help" hidden>
     <div class="card" id="hpCard">
-      <h2>使い方（音声マニュアル） <span class="note">音声に合わせて画面イメージの該当箇所が光り、字幕が切り替わります。全12章・約10分。聞いた位置はこの端末に保存され、続きから再生できます。</span></h2>
+      <h2 id="hpTitle">使い方（音声マニュアル） <span class="note">音声に合わせて画面イメージの該当箇所が光り、字幕が切り替わります。全12章・約10分。聞いた位置はこの端末に保存され、続きから再生できます。</span></h2>
       <p style="margin:0 0 12px"><a href="https://claude.ai/code/artifact/710095e3-05c0-42b3-9555-8a94b9a31158" target="_blank" rel="noopener" style="color:var(--accent);font-weight:700">書面マニュアルを開く →</a></p>
       <div class="hp-wrap">
         <div class="hp-player">
@@ -841,7 +849,7 @@ const API_URL = "https://script.google.com/macros/s/AKfycbziWNY_XnUyTjyz_3PqkA2u
   const TAIKAI_REASONS = ['進学・受験','部活・他の習い事へ','引っ越し・転勤','時間が合わない（仕事・学校）','費用','本人の意欲低下・飽き','けが・体調','家庭の事情','指導・道場の雰囲気','その他・不明'];
   // 新機能のお知らせ（日付から7日間、ダッシュボード上部に表示。×で閉じると再表示しない）
   const RELEASE_NOTES = [
-    {date:'2026-10-18', items:['過去の月次入力の新規入会・退会を週ごとの記録に移せるようにしました（管理者が1回押すだけ。日付はその月の入力日か月末の仮置きで、一覧に「過去分・日付は仮」と出ます。内訳の無い人数は「区分不明」）','「AI に聞く」に音声を追加：「🎤 話す」を押して話すとそのまま質問になり、「回答を読み上げる」にチェックすると答えを声で読みます（端末の声。費用なし。音声入力は Firefox 以外のブラウザで使えます）','使い方（音声マニュアル）を10/18版に更新：「入会・退会の記録」と「AI に聞く」の章を追加し、稽古スケジュールの章に「最初に道場の設定で、同時に入れる最大人数とクラスごとの定員を登録する」を追加しました（全12章・約10分）','ダッシュボードの「AI に聞く」とタスクタブの「LINE 通知」を戻しました。AI は週ごとの入退会の記録も見て答えます。使いすぎを防ぐため、質問は1人1日10回まで・全員で月300回まで、要約と理事会コメント案は田中・石川だけが作れます（スプレッドシート側の設定が済むまでは「未設定」と表示されます）','お知らせ欄を「更新履歴」ボタンにしました。普段は閉じていて、押すとこれまでの更新がすべて見られます（新しい更新があると NEW が付きます）','「掲載サイト」タブの候補に15件を追加しました（コドモブースター・ちびスポ・キッズスクールなど。友人の調べた料金で登録、公式ページは未確認）。10月にChatGPT経由で来た見学は、広告ではなく回答で紹介されたものなので「ChatGPT（AIの回答で紹介・無料）」として別に登録しました（ChatGPT広告は未使用のため「未申込」のまま）。タブ上部の「調査結果を反映」を押すと一覧に入ります',
+    {date:'2026-10-18', items:['各タブの一番下に「▶ このページの使い方を聞く」を追加：そのページの説明だけを音声と画面イメージで聞けます（全章は「使い方」タブ）','タスクの担当をチェックで選ぶ形にしました（塚本代表・田中理事・斉藤理事・平井理事・宮内監事・石川事務局長・江利菜さん・渡辺優作指導員・渡辺和志指導員・事務局・各道場責任者。複数選べます）。担当の絞り込みも人ごとになり、「石川事務局長ほか」なども石川事務局長で出ます','過去の月次入力の新規入会・退会を週ごとの記録に移せるようにしました（管理者が1回押すだけ。日付はその月の入力日か月末の仮置きで、一覧に「過去分・日付は仮」と出ます。内訳の無い人数は「区分不明」）','「AI に聞く」に音声を追加：「🎤 話す」を押して話すとそのまま質問になり、「回答を読み上げる」にチェックすると答えを声で読みます（端末の声。費用なし。音声入力は Firefox 以外のブラウザで使えます）','使い方（音声マニュアル）を10/18版に更新：「入会・退会の記録」と「AI に聞く」の章を追加し、稽古スケジュールの章に「最初に道場の設定で、同時に入れる最大人数とクラスごとの定員を登録する」を追加しました（全12章・約10分）','ダッシュボードの「AI に聞く」とタスクタブの「LINE 通知」を戻しました。AI は週ごとの入退会の記録も見て答えます。使いすぎを防ぐため、質問は1人1日10回まで・全員で月300回まで、要約と理事会コメント案は田中・石川だけが作れます（スプレッドシート側の設定が済むまでは「未設定」と表示されます）','お知らせ欄を「更新履歴」ボタンにしました。普段は閉じていて、押すとこれまでの更新がすべて見られます（新しい更新があると NEW が付きます）','「掲載サイト」タブの候補に15件を追加しました（コドモブースター・ちびスポ・キッズスクールなど。友人の調べた料金で登録、公式ページは未確認）。10月にChatGPT経由で来た見学は、広告ではなく回答で紹介されたものなので「ChatGPT（AIの回答で紹介・無料）」として別に登録しました（ChatGPT広告は未使用のため「未申込」のまま）。タブ上部の「調査結果を反映」を押すと一覧に入ります',
      '入会・退会の入力を1か所にまとめ、「入退会・月次入力」タブにしました：上の①で入会・退会をあった日に1人ずつ記録すると、月曜〜日曜の週ごとに道場別の入会・退会・純増減が出ます（毎週月曜の定例ミーティング用。ダッシュボードにも先週・今週の表を追加）','月次入力（同じタブの③）では新規・退会は入れません（①の記録から自動）。在籍・休会などの会員数を月末に登録してください']},
     {date:'2026-10-15', items:['ダッシュボードに「AI に聞く」を追加：会員数・新規・退会・チラシ・目標・タスクのデータをもとに質問に答え、表示中の月の要約と理事会コメント案も作れます（AI の案なので数字は各タブで確認を）','タスクの期限が過ぎた・3日以内に迫った未完了タスクを、毎朝 LINE で担当者ごとに通知するようにしました（タスクタブの下の「LINE 通知」で、受け取る人の登録と担当者名の設定ができます）']},
     {date:'2026-10-13', items:['ダッシュボードの一番下に「使い方（音声マニュアル）」を表示するようにしました（タブの一番右の「使い方」でも同じものが開きます）','「掲載サイト」タブの候補に「ChatGPT広告」を追加し、各掲載先の料金を10/13に掲載案内ページで確認した内容に直しました（子供の習い事図鑑は無料プランなし・月980円〜、スクルー・スポスルは成果報酬の条件、ほか有料プランの金額）。タブ上部の「調査結果を反映」を押すと入ります。手で書き換えた料金・メモは上書きしません']},
@@ -2632,7 +2640,7 @@ const API_URL = "https://script.google.com/macros/s/AKfycbziWNY_XnUyTjyz_3PqkA2u
     if (tasksError){ $('tkNote').textContent='シートを読めませんでした：'+tasksError; }
     const fill=(id,vals)=>{ const el=$(id); const cur=el.value; el.innerHTML='<option value="">すべて</option>'+vals.map(v=>`<option${v===cur?' selected':''}>${esc(v)}</option>`).join(''); };
     fill('tkTheme', [...new Set(tasks.map(t=>t.theme).filter(Boolean))]);
-    fill('tkOwner', [...new Set(tasks.map(t=>t.owner).filter(Boolean))]);
+    fill('tkOwner', [...TASK_PEOPLE.map(p=>p.n).filter(n=>tasks.some(t=>ownerPeople(t.owner).includes(n))), ...[...new Set(tasks.filter(t=>t.owner && !ownerPeople(t.owner).length).map(t=>t.owner))]]);
     TK_STATUS = [...new Set(['未着手','進行中','完了','保留', ...tasks.map(t=>t.status).filter(Boolean)])];
     const open = tasks.filter(t=>t.status!=='完了');
     $('tkKpis').innerHTML = [['全タスク', tasks.length], ['未完了', open.length], ['高優先度（未完了）', open.filter(t=>t.priority==='高').length], ['期限超過', tasks.filter(isOverdue).length], ['次回報告 要', open.filter(t=>t.report==='要').length]]
@@ -2641,7 +2649,7 @@ const API_URL = "https://script.google.com/macros/s/AKfycbziWNY_XnUyTjyz_3PqkA2u
   }
   function renderTaskTable(){
     const th=$('tkTheme').value, ow=$('tkOwner').value, stv=$('tkStatus').value, rp=$('tkReport').checked, q=$('tkSearch').value.trim();
-    const list = tasks.filter(t => (!th||t.theme===th) && (!ow||t.owner===ow) && (stv==='open'? t.status!=='完了' : !stv || t.status===stv) && (!rp||t.report==='要') && (!q || [t.task,t.reportNote,t.nextAction,t.blocker,t.dod].join(' ').includes(q)));
+    const list = tasks.filter(t => (!th||t.theme===th) && (!ow||t.owner===ow||ownerPeople(t.owner).includes(ow)) && (stv==='open'? t.status!=='完了' : !stv || t.status===stv) && (!rp||t.report==='要') && (!q || [t.task,t.reportNote,t.nextAction,t.blocker,t.dod].join(' ').includes(q)));
     const prioOrd = {高:0,中:1,低:2};
     const dueKey = t => { const d=new Date(String(t.due||'').replace(/-/g,'/')); return t.due && !isNaN(d) ? d.getTime() : Infinity; };  // 期限なしは最後
     const byPrio = (a,b)=> ((prioOrd[a.priority]!=null?prioOrd[a.priority]:3)-(prioOrd[b.priority]!=null?prioOrd[b.priority]:3));
@@ -2650,12 +2658,13 @@ const API_URL = "https://script.google.com/macros/s/AKfycbziWNY_XnUyTjyz_3PqkA2u
     const sortMode = $('tkSort').value;
     list.sort((a,b)=> sortMode==='prio' ? (byPrio(a,b)||byDue(a,b)||byId(a,b)) : sortMode==='id' ? byId(a,b) : (byDue(a,b)||byPrio(a,b)||byId(a,b)));
     $('tkTable').innerHTML = `<thead><tr><th>ID</th><th>テーマ</th><th style="text-align:left">Task</th><th>担当</th><th>優先</th><th>Status</th><th>Progress</th><th>実行期限</th><th>報告</th><th>Risk</th><th>最終更新</th><th>編集</th></tr></thead><tbody>` +
-      (list.length? list.map(t=>`<tr class="tk-row" data-id="${esc(t.id)}"><td class="num">${esc(t.id)}</td><td>${esc(t.theme)}</td><td class="tk-task" data-open="${esc(t.id)}">${esc(t.task)}</td><td>${esc(t.owner)}</td><td><span class="pill ${t.priority==='高'?'red':t.priority==='中'?'yellow':'gray'}">${esc(t.priority)}</span></td>
+      (list.length? list.map(t=>`<tr class="tk-row" data-id="${esc(t.id)}"><td class="num">${esc(t.id)}</td><td>${esc(t.theme)}</td><td class="tk-task" data-open="${esc(t.id)}">${esc(t.task)}</td><td title="${esc(t.owner)}">${(()=>{ const ps=ownerPeople(t.owner); return ps.length ? ps.map(n=>`<span class="chip">${esc(n)}</span>`).join(' ') : esc(t.owner); })()}</td><td><span class="pill ${t.priority==='高'?'red':t.priority==='中'?'yellow':'gray'}">${esc(t.priority)}</span></td>
         <td><select class="tk-st" data-tkst="${esc(t.id)}" title="ここで変えるとシートに保存されます">${optList(TK_STATUS, t.status)}</select></td>
         <td class="num">${esc(t.progress)||'—'}</td>
         <td class="num ${isOverdue(t)?'overdue':''}">${esc(t.due)}</td><td>${t.report==='要'?'<span class="pill yellow">要</span>':esc(t.report)}</td><td>${riskPill(t.risk)}</td><td class="num" style="color:var(--muted);font-size:12px">${esc(t.lastUpdate)}</td><td><button type="button" class="ghost tk-edit" data-open="${esc(t.id)}" aria-expanded="${tkOpen===t.id}">${tkOpen===t.id?'閉じる':'編集'}</button></td></tr>` +
         (tkOpen===t.id ? `<tr class="tk-detail"><td colspan="12">${taskFormHtml(t, 'e')}<div class="actions" style="margin-top:8px"><button type="button" class="primary" data-tksave="${esc(t.id)}">シートに保存</button><button type="button" class="ghost" data-tkclose="1">閉じる</button><span class="msg" id="tkEditMsg"></span><span class="msg" style="margin-left:auto">最終更新 ${esc(t.lastUpdate)||'—'}　出典 ${esc(t.source)||'—'}</span></div></td></tr>` : '')).join('')
       : `<tr><td colspan="12" style="text-align:center;color:var(--muted)">該当するタスクがありません</td></tr>`) + '</tbody>';
+    wireOwnerPicker($('tkTable'));
     $('tkTable').querySelectorAll('[data-open]').forEach(el=>el.addEventListener('click', ()=>{ tkOpen = tkOpen===el.dataset.open ? null : el.dataset.open; renderTaskTable(); }));
     $('tkTable').querySelectorAll('[data-tkclose]').forEach(el=>el.addEventListener('click', ()=>{ tkOpen=null; renderTaskTable(); }));
     $('tkTable').querySelectorAll('[data-tksave]').forEach(el=>el.addEventListener('click', ()=>saveTaskEdit(el.dataset.tksave)));
@@ -2663,6 +2672,22 @@ const API_URL = "https://script.google.com/macros/s/AKfycbziWNY_XnUyTjyz_3PqkA2u
   }
 
   // ---- 編集（シートに書き込み） ----
+  // 担当者の一覧（チェックで選ぶ）。m = 既存の書き方からその人と判定する文字（「石川事務局長ほか」→石川事務局長 など）
+  const TASK_PEOPLE = [
+    {n:'塚本代表', m:['塚本代表','塚本師範','師範']},
+    {n:'田中理事', m:['田中','シンさん']},
+    {n:'斉藤理事', m:['斉藤','齋藤','斎藤','齊藤']},
+    {n:'平井理事', m:['平井']},
+    {n:'宮内監事', m:['宮内']},
+    {n:'石川事務局長', m:['石川']},
+    {n:'江利菜さん', m:['江利菜']},
+    {n:'渡辺優作指導員', m:['渡辺優作','優作']},
+    {n:'渡辺和志指導員', m:['渡辺和志','和志']},
+    {n:'事務局', re:/事務局(?!長)/},
+    {n:'各道場責任者', m:['各道場責任者','各道場主','道場責任者','各道場']},
+  ];
+  const ownerHas = (owner, p) => { const o=String(owner||'').replace(/[\s　]/g,''); return p.re ? p.re.test(o) : (p.m||[p.n]).some(x=>o.includes(x)); };
+  const ownerPeople = owner => TASK_PEOPLE.filter(p=>ownerHas(owner,p)).map(p=>p.n);
   const TK_PRIO = ['高','中','低'], TK_REPORT = ['要','不要'], TK_RISK = ['Red','Yellow','Green'], TK_PROG = ['0%','25%','50%','75%','100%'];
   let TK_STATUS = ['未着手','進行中','完了','保留'];
   const optList = (list, cur, blank) => { const l=[...list]; if (cur && !l.includes(cur)) l.push(cur); return (blank?'<option value=""></option>':'') + l.map(v=>`<option${v===cur?' selected':''}>${esc(v)}</option>`).join(''); };
@@ -2677,7 +2702,7 @@ const API_URL = "https://script.google.com/macros/s/AKfycbziWNY_XnUyTjyz_3PqkA2u
     return `<div class="form-grid" style="margin-bottom:6px">
       ${f('task','Task（やること）',inp('task',t.task,'例：ホームページの料金表示を修正'),true)}
       ${f('theme','テーマ',`<input type="text" id="${p}_theme" list="tkThemeList" value="${esc(t.theme||'')}">`)}
-      ${f('owner','担当（Owner）',`<input type="text" id="${p}_owner" list="tkOwnerList" value="${esc(t.owner||'')}">`)}
+      ${f('owner','担当（Owner）・複数選べます',`<input type="hidden" id="${p}_owner" value="${esc(t.owner||'')}"><div class="tk-owners" data-ownfor="${p}">${(()=>{ const sel=ownerPeople(t.owner); const other = sel.length ? '' : String(t.owner||''); return TASK_PEOPLE.map(x=>`<label class="tk-own"><input type="checkbox" value="${esc(x.n)}"${sel.includes(x.n)?' checked':''}> ${esc(x.n)}</label>`).join('') + `<input type="text" class="tk-own-other" placeholder="その他（一覧にない人）" value="${esc(other)}">`; })()}</div>`,true)}
       ${f('priority','優先度',sel('priority',TK_PRIO,t.priority||'中'))}
       ${f('status','Status',sel('status',TK_STATUS,t.status||'未着手'))}
       ${f('progress','Progress',sel('progress',TK_PROG,t.progress||'0%'))}
@@ -2691,7 +2716,13 @@ const API_URL = "https://script.google.com/macros/s/AKfycbziWNY_XnUyTjyz_3PqkA2u
       ${f('dod','Definition of Done（完了条件）',ta('dod',t.dod),true)}
     </div>
     <datalist id="tkThemeList">${[...new Set(tasks.map(x=>x.theme).filter(Boolean))].map(v=>`<option value="${esc(v)}">`).join('')}</datalist>
-    <datalist id="tkOwnerList">${[...new Set(tasks.map(x=>x.owner).filter(Boolean))].map(v=>`<option value="${esc(v)}">`).join('')}</datalist>`;
+`;
+  }
+  // 担当のチェックを変えたら、隠し欄に「・」区切りで入れる（触らなければ元の書き方のまま）
+  function wireOwnerPicker(scope){
+    scope.querySelectorAll('.tk-owners').forEach(box=>{ const p=box.dataset.ownfor; const hid=$(p+'_owner'); if(!hid) return;
+      const upd=()=>{ const v=[...box.querySelectorAll('input[type=checkbox]:checked')].map(x=>x.value); const o=box.querySelector('.tk-own-other').value.trim(); if(o) v.push(o); hid.value=v.join('・'); };
+      box.querySelectorAll('input').forEach(el=>el.addEventListener(el.type==='checkbox'?'change':'input', upd)); });
   }
   const TK_FIELDS = ['task','theme','owner','priority','status','progress','due','report','reportDue','risk','reportNote','nextAction','blocker','dod'];
   function readTaskForm(p){ const o={}; TK_FIELDS.forEach(k=>{ const el=$(p+'_'+k); if(!el) return; let v=el.value; if (k==='due'||k==='reportDue') v=fromDateInput(v); o[k]=String(v).trim(); }); return o; }
@@ -2719,6 +2750,7 @@ const API_URL = "https://script.google.com/macros/s/AKfycbziWNY_XnUyTjyz_3PqkA2u
     const box=$('tkAddBox'); if (!box.hidden){ box.hidden=true; return; }
     box.innerHTML = `<b style="display:block;margin-bottom:8px">新しいタスク <span class="note">最後のタスクの下に追加し、IDは自動で採番します（出典は「アプリ（名前）日付」）</span></b>` + taskFormHtml({report:'要', priority:'中', status:'未着手', progress:'0%'}, 'n') +
       `<div class="actions" style="margin-top:8px"><button type="button" class="primary" id="tkAddSave">シートに追加</button><button type="button" class="ghost" id="tkAddCancel">キャンセル</button><span class="msg" id="tkAddMsg"></span></div>`;
+    wireOwnerPicker(box);
     box.hidden=false; $('n_task').focus();
     $('tkAddCancel').addEventListener('click', ()=>{ box.hidden=true; });
     $('tkAddSave').addEventListener('click', async ()=>{
@@ -3023,7 +3055,7 @@ const MISC_TAB={area:6,portal:7,ads:8,trend:9,price:10};
 const CH=[{"id": "00", "title": "はじめに", "dur": 17.832, "cues": [{"s": "intro", "h": "", "t": "塚本道場羅針盤の、使い方マニュアルです。", "at": 0.0}, {"s": "intro", "h": "", "t": "音声に合わせて、画面のイメージと字幕が切り替わります。", "at": 3.79}, {"s": "intro", "h": "ver", "t": "この内容は、二千二十六年十月十八日版のアプリに合わせています。", "at": 7.98}, {"s": "intro", "h": "ch", "t": "章ごとに分かれているので、見たいところだけ再生してください。", "at": 13.54}]}, {"id": "01", "title": "第一章 開きかたと数えかた", "dur": 50.784, "cues": [{"s": "login", "h": "url", "t": "まず、スマホかパソコンで、アプリのアドレスを開きます。アドレスは書面のマニュアルに載っています。", "at": 0}, {"s": "login", "h": "pass", "t": "次に、理事会で共有している、四けたの共通パスコードを入れます。", "at": 7.38}, {"s": "login", "h": "name", "t": "続いて、お名前を入れます。名前は、誰が変更したかの記録に使うので、必ずご自分の名前を入れてください。", "at": 12.78}, {"s": "login", "h": "open", "t": "開く、を押せば完了です。一度入れると端末が覚えるので、次からは入力いりません。", "at": 21.35}, {"s": "login", "h": "lock", "t": "終わるときは、右上のロックを押して、パスコードの画面に戻します。", "at": 28.47}, {"s": "rule", "h": "f", "t": "道場生の数は、実働会員で数えます。実働会員は、在籍から休会を引いた人数です。", "at": 33.49}, {"s": "rule", "h": "goal", "t": "本部の起点は、二千二十六年七月の実働二百三名。目標は、二千二十七年十二月末に、三百三名です。", "at": 41.21}]}, {"id": "02", "title": "第二章 画面の見かたと共通の操作", "dur": 48.984, "cues": [{"s": "tabs", "h": "tabs", "t": "画面の上のタブで、画面を切り替えます。タブは十二個あります。いちばん右が、この使い方です。", "at": 0}, {"s": "tabs", "h": "month", "t": "表示する月、という欄で、見たい月を選ぶと、画面がその月に切り替わります。", "at": 7.75}, {"s": "tabs", "h": "load", "t": "開いた直後は前回の数字が表示され、右上に、最新を読み込み中、と出ます。入力は、この表示が消えてから始めてください。", "at": 14.0}, {"s": "tabs", "h": "sync", "t": "画面は一分ごとに自動で最新になります。編集の画面を開いている間は、書き換えません。", "at": 24.3}, {"s": "tabs", "h": "hist", "t": "保存した操作は、いつ、誰が、何を、どう変えたか、すべて変更履歴に残ります。", "at": 31.18}, {"s": "tabs", "h": "rel", "t": "ダッシュボードの上の、更新履歴、を押すと、これまでにアプリを直した内容が、すべて見られます。新しい更新があると、ニューの印が付きます。", "at": 38.41}]}, {"id": "03", "title": "第三章 ダッシュボードと月末の会員数", "dur": 80.472, "cues": [{"s": "dash", "h": "kpi", "t": "ダッシュボードは、今月どうだったかを、一画面で見る場所です。一番上に、主な数字のカードが並びます。", "at": 0}, {"s": "dash", "h": "alert", "t": "月次入力がまだの道場があると、アラートで知らせます。", "at": 8.21}, {"s": "dash", "h": "grid", "t": "登録状況の表は、セルを押すと、その道場、その月の、月次入力の画面に移ります。", "at": 12.54}, {"s": "dash", "h": "route", "t": "下には、入会の経路と、退会の理由が集計されます。", "at": 19.8}, {"s": "input", "h": "month", "t": "ここからは、道場主の毎月の作業、月次入力です。まず、対象の月を選びます。", "at": 24.51}, {"s": "input", "h": "dojo", "t": "次に、自分の道場を選びます。", "at": 31.95}, {"s": "input", "h": "zai", "t": "区分ごとの、在籍の人数と、休会の人数を入れます。実働は自動で計算されます。", "at": 34.83}, {"s": "input", "h": "extra", "t": "エクササイズなどの追加クラスがあれば、人数を入れます。", "at": 41.86}, {"s": "input", "h": "new", "t": "新規入会と退会は、このページの上の、入会・退会を記録する、で入れます。月次入力では入れません。記録した人数は、ここに自動で表示されます。", "at": 45.88}, {"s": "input", "h": "flyer", "t": "チラシの枚数は、チラシ配布報告を使っていれば、空欄のままで大丈夫です。", "at": 58.19}, {"s": "input", "h": "save", "t": "保存を押します。最終更新の日時と、自分の名前が出れば完了です。", "at": 64.36}, {"s": "input", "h": "zai", "t": "大事なお願いです。月次入力では、月末の在籍と休会の人数を、必ず入れてください。道場生の数は、ここから計算します。", "at": 70.13}]}, {"id": "04", "title": "第四章 入会・退会の記録と週ごとの集計", "dur": 59.568, "cues": [{"s": "moves", "h": "rec", "t": "入退会・月次入力のタブの、いちばん上の、入会・退会を記録する、で、入会と退会を、あった日に一件ずつ記録します。入会と退会を入れるのは、ここだけです。", "at": 0}, {"s": "moves", "h": "rec", "t": "日付、道場、入会か退会か、区分を選び、入会なら経路、退会なら理由を選んで、記録する、を押します。", "at": 13.91}, {"s": "moves", "h": "rec", "t": "一人ずつ入れるのが基本ですが、同じ区分と経路なら、人数をまとめても大丈夫です。メモに、お名前は書かないでください。", "at": 23.5}, {"s": "moves", "h": "week", "t": "週は、月曜日から日曜日で区切ります。月曜日のミーティングでは、先週、のボタンを押すと、道場ごとの入会、退会、純増減が出ます。", "at": 32.56}, {"s": "moves", "h": "dash", "t": "ダッシュボードにも、先週と今週の、入退会の表が出ます。", "at": 43.97}, {"s": "moves", "h": "auto", "t": "記録した内容は、同じページの下の、月次入力に、自動で足し上がります。間違えたときは、記録一覧から削除して、入れ直してください。", "at": 48.7}]}, {"id": "05", "title": "第五章 チラシ配布報告", "dur": 36.624, "cues": [{"s": "flyer", "h": "", "t": "チラシを配ったら、その日のうちに報告してください。グーグルフォームからでも、アプリからでもできます。", "at": 0}, {"s": "flyer", "h": "form", "t": "フォームの質問に沿って、配布日、道場、枚数、配布エリアなどを入れます。", "at": 7.11}, {"s": "flyer", "h": "area", "t": "配布エリアは、町の名前と、何丁目、まで書いてください。地図の上で、どこを配ったかが判定できます。", "at": 13.33}, {"s": "flyer", "h": "air", "t": "エアニックスのチラシは、道場の欄で、エアニックス野沢、またはエアニックス用賀を選びます。自動でエアニックス側に移り、道場の枚数には入りません。", "at": 21.6}, {"s": "flyer", "h": "del", "t": "間違えた報告は、一覧から削除できます。", "at": 32.93}]}, {"id": "06", "title": "第六章 稽古スケジュール", "dur": 43.272, "cues": [{"s": "sched", "h": "", "t": "道場ごとに、一週間のコマ表をつくり、指導員の割り当てを管理します。", "at": 0.0}, {"s": "sched", "h": "cfg", "t": "最初に、画面の下の、道場の設定で、同時に入れる最大人数と、クラスごとの定員を登録してください。コマを追加するときは、この定員が、はじめから入ります。", "at": 5.58}, {"s": "sched", "h": "add", "t": "曜日、開始と終了の時刻、クラス、定員、指導者を入れて、コマを追加します。時刻は十分きざみ、指導者は、指導員マスタから選びます。", "at": 18.22}, {"s": "sched", "h": "warn", "t": "時間の重なり、定員の超過、同じ指導員の二重の割り当てがあると、警告が出ます。保存の前に直してください。", "at": 30.21}, {"s": "sched", "h": "sum", "t": "画面の下では、指導員ごとの担当コマ数を確認できます。", "at": 39.02}]}, {"id": "07", "title": "第七章 タスクとLINE通知", "dur": 65.4, "cues": [{"s": "task", "h": "", "t": "タスクのタブは、石川事務局長の、週間進捗会議の管理シートとつながっています。アプリで変えるとシートも変わり、シートで変えるとアプリにも出ます。", "at": 0.0}, {"s": "task", "h": "st", "t": "状況を変えるときは、ステータスを、その場で選び直します。完了にすると、進捗が百パーセントになります。", "at": 10.88}, {"s": "task", "h": "name", "t": "中身を直すときは、タスク名を押します。", "at": 19.11}, {"s": "task", "h": "add", "t": "新しく足すときは、プラスタスクを追加、を押します。番号と出典は自動で付きます。", "at": 22.33}, {"s": "task", "h": "done", "t": "タスクは削除できません。終わったものは、完了にして、履歴として残します。", "at": 28.97}, {"s": "task", "h": "warn", "t": "開いている間に、ほかの人が同じ項目を変えていたら、上書きせずに止まります。読み込み直してから、もう一度直してください。", "at": 34.96}, {"s": "task", "h": "line", "t": "タスクのタブの下には、ライン通知の設定があります。期限が過ぎたタスクや、期限まで三日以内のタスクを、毎朝、担当者にラインでお知らせします。", "at": 44.41}, {"s": "task", "h": "line", "t": "受け取るには、塚本道場のライン公式アカウントを友だち追加して、何か一言送ってください。担当者名の設定は、管理者が行います。", "at": 55.24}]}, {"id": "08", "title": "第八章 大会と道場の予定", "dur": 52.776, "cues": [{"s": "tour", "h": "list", "t": "本部の大会の情報は、毎朝七時台に、本部のサイトから自動で取り込まれます。", "at": 0}, {"s": "tour", "h": "btn", "t": "大会ごとに、参加、保留、不参加、を選びます。", "at": 6.18}, {"s": "tour", "h": "cal", "t": "参加にすると、理事会のグーグルカレンダーに登録され、理事と事務局に招待メールが届きます。参加以外に戻すと、カレンダーから消えます。", "at": 10.84}, {"s": "tour", "h": "fetch", "t": "最新の大会が出ていないときは、本部サイトから最新を取得、を押してください。", "at": 21.22}, {"s": "tour", "h": "line", "t": "ライン用の大会案内の文章は、自動でつくられます。日付、大会名、申込期間、主管道場のサイトのアドレスが入ります。", "at": 27.17}, {"s": "tour", "h": "url", "t": "申込ページや、募集要項のアドレスは自動では入らないので、必要な大会だけ、手で貼ってください。", "at": 37.22}, {"s": "tour", "h": "redo", "t": "古い書式のままの案内文は、この内容で文章を作り直す、を押すと、新しい書式になります。", "at": 45.06}]}, {"id": "09", "title": "第九章 理事向けのタブ", "dur": 48.72, "cues": [{"s": "misc", "h": "area", "t": "周辺情報では、道場ごとに、半径一・五キロの、学校や保育園の数、子どもの人口、ほかの空手教室の数が見られます。", "at": 0}, {"s": "misc", "h": "portal", "t": "掲載サイトでは、習い事ポータルや地図サービスの掲載状況と、毎月の反響を管理します。パスワードは書かないでください。", "at": 10.18}, {"s": "misc", "h": "ads", "t": "グーグル広告では、広告費と、広告経由の入会を入れると、入会一人あたりの広告費が出ます。目標内なら緑、超えたら赤です。", "at": 19.42}, {"s": "misc", "h": "trend", "t": "推移では、月ごとの会員数や売上、チラシの反応率を、一年分の表で見られます。", "at": 30.0}, {"s": "misc", "h": "price", "t": "料金マスタと目標では、月謝、会員数の目標、追加クラス、指導員を設定します。ここを変えると、売上や目標進捗の計算が変わります。", "at": 36.91}]}, {"id": "10", "title": "第十章 AIに聞く", "dur": 55.296, "cues": [{"s": "ai", "h": "ask", "t": "ダッシュボードの、AIに聞く、では、羅針盤に入っている数字をもとに、質問に答えます。", "at": 0}, {"s": "ai", "h": "ask", "t": "たとえば、先週の入会と退会はどうだった、や、三百三名まであと何名、のように聞いてください。ボタンを押すだけでも聞けます。", "at": 7.25}, {"s": "ai", "h": "ask", "t": "答えには、根拠にした月と道場が付きます。AIの答えは案なので、数字は各タブで確かめてから使ってください。", "at": 17.06}, {"s": "ai", "h": "voice", "t": "声でも聞けます。話す、のボタンを押して質問を話すと、そのまま送られます。回答を読み上げる、にチェックを入れると、答えを声で読み上げます。", "at": 25.74}, {"s": "ai", "h": "lim", "t": "質問は、一人一日十回まで、全員で月三百回までです。残りの回数は、質問欄の下に出ます。", "at": 36.69}, {"s": "ai", "h": "sum", "t": "月の要約と、理事会のコメント案は、田中と石川だけが作れます。作った要約は、スプレッドシートに保存され、コピーして配れます。", "at": 45.25}]}, {"id": "11", "title": "第十一章 毎月の流れと困ったとき", "dur": 58.944, "cues": [{"s": "flow", "h": "dojo", "t": "毎月の流れです。道場主は、入会と退会を、あった日に、入退会・月次入力のタブで記録し、月末に、同じタブの月次入力で、在籍と休会の人数を入れます。チラシは、配った日に報告します。", "at": 0}, {"s": "flow", "h": "mon", "t": "毎週月曜日の定例ミーティングでは、入退会・月次入力のタブの、週ごとの集計で、先週の数字を確認します。", "at": 17.05}, {"s": "flow", "h": "office", "t": "事務局は、未入力アラートを見て、声をかけます。", "at": 26.27}, {"s": "flow", "h": "board", "t": "理事は、ダッシュボードと推移で進み具合を確認し、大会の参加判断と、タスクの更新をします。", "at": 30.45}, {"s": "trouble", "h": "a", "t": "困ったとき。開いて古い数字のままなら、数秒待ってください。", "at": 37.99}, {"s": "trouble", "h": "b", "t": "名前を間違えたら、ロックで戻って、開き直してください。", "at": 42.97}, {"s": "trouble", "h": "c", "t": "タスクが保存できずに止まったら、読み込み直してから、やり直してください。", "at": 47.64}, {"s": "trouble", "h": "d", "t": "それでも直らないときは、田中まで連絡してください。以上で、マニュアルを終わります。", "at": 53.02}]}];
 const $=id=>document.getElementById(id), au=$('hpAudio'), root=$('hpCard');
 let ci=0,cur='',rate=1,ready=false;
-const src=i=>'manual/ch'+String(i).padStart(2,'0')+'.mp3?v='+HELP_VER;
+const src=i=>'manual/ch'+CH[i].id+'.mp3?v='+HELP_VER;
 function tabsHTML(t){return t===-2?'':TABS.map((x,i)=>`<span class="${i===t?'on':''}">${x}</span>`).join('')}
 function show(c,q){const sc=S[q.s];if(cur!==q.s){$('hpBody').innerHTML=sc.h();cur=q.s}
  let t=sc.tab;if(q.s==='misc')t=MISC_TAB[q.h]??6;if(q.s==='tabs'&&q.h==='tabs')t=-1;
@@ -3035,34 +3067,70 @@ function show(c,q){const sc=S[q.s];if(cur!==q.s){$('hpBody').innerHTML=sc.h();cu
  $('hpSub').textContent=q.t}
 function cueAt(c,t){let q=c.cues[0];for(const x of c.cues){if(x.at<=t+0.05)q=x}return q}
 const KEY='rashinban_manual_pos_v1';
-function savePos(){try{localStorage.setItem(KEY,JSON.stringify({i:ci,t:au.currentTime}))}catch(e){}}
+function savePos(){if(mode!=='all')return;try{localStorage.setItem(KEY,JSON.stringify({i:si,t:au.currentTime}))}catch(e){}}
 function getPos(){try{return JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){return null}}
 function tryPlay(){$('hpErr').textContent='';const p=au.play();if(p&&p.catch)p.catch(()=>{ if(!au.error) $('hpSub').textContent='▶ をもう一度押してください。'; })}
-function load(i,play,at){ci=i;const c=CH[i];au.src=src(i);if(at){au.addEventListener('loadedmetadata',function f(){au.currentTime=at;au.removeEventListener('loadedmetadata',f)})}au.playbackRate=rate;cur='';show(c,c.cues[0]);
- $('hpFill').style.width='0%';$('hpTm').textContent=fmt(at||0)+' / '+fmt(c.dur);
- root.querySelectorAll('.hp-ch').forEach((e,j)=>e.classList.toggle('on',j===i));if(play)tryPlay()}
-const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+const fmt=s=>Math.floor(Math.max(0,s)/60)+':'+String(Math.floor(Math.max(0,s)%60)).padStart(2,'0');
+// ---- 再生する範囲（区間）。「使い方」タブは全章、ほかのタブはその画面の章・箇所だけ ----
+const chIdx=id=>CH.findIndex(c=>c.id===id);
+function seg(id,pred,label){const i=chIdx(id);if(i<0)return null;const c=CH[i];
+ if(!pred)return{i,a:0,b:c.dur,title:label||c.title};
+ const idx=c.cues.map((q,k)=>pred(q)?k:-1).filter(k=>k>=0);if(!idx.length)return null;
+ const f=idx[0],l=idx[idx.length-1];return{i,a:c.cues[f].at,b:l+1<c.cues.length?c.cues[l+1].at-0.05:c.dur,title:label||c.title}}
+const short=id=>{const c=CH[chIdx(id)];return c?c.title:''};
+const PAGE={
+ dash:()=>[seg('03',q=>q.s==='dash',short('03')+'（ダッシュボードの部分）'),seg('10')],
+ input:()=>[seg('04'),seg('03',q=>q.s==='input',short('03')+'（月次入力の部分）')],
+ flyer:()=>[seg('05')], sched:()=>[seg('06')], tasks:()=>[seg('07')], tour:()=>[seg('08')],
+ news:()=>[seg('09',q=>q.h==='area',short('09')+'（周辺情報）')], portal:()=>[seg('09',q=>q.h==='portal',short('09')+'（掲載サイト）')],
+ ads:()=>[seg('09',q=>q.h==='ads',short('09')+'（Google広告）')], trend:()=>[seg('09',q=>q.h==='trend',short('09')+'（推移）')],
+ rates:()=>[seg('09',q=>q.h==='price',short('09')+'（料金マスタ・目標）')]
+};
+let segs=[],si=0,mode='all',pageTab='',pendingAt=null;
+function setSegs(tab){mode=tab==='help'?'all':'page';pageTab=tab;
+ segs=mode==='all'?CH.map((c,i)=>({i,a:0,b:c.dur,title:c.title})):(PAGE[tab]?PAGE[tab]().filter(Boolean):[]);
+ $('hpList').innerHTML=segs.map((g,k)=>`<button type="button" class="hp-ch" data-k="${k}"><span>${mode==='all'?(k+1)+'. ':''}${g.title}</span><span class="d">${fmt(g.b-g.a)}</span></button>`).join('');
+ root.querySelectorAll('.hp-ch').forEach(e=>e.addEventListener('click',()=>loadSeg(+e.dataset.k,true)));
+ const ttl=$('hpTitle');if(ttl&&ttl.firstChild)ttl.firstChild.nodeValue=mode==='all'?'使い方（音声マニュアル） ':'このページの使い方（音声） ';
+ $('hpRestart').hidden=true}
+function loadSeg(k,play,at){si=k;const g=segs[k];if(!g)return;ci=g.i;const c=CH[ci];const want=(at!=null?at:g.a);
+ if(au.getAttribute('data-src')!==src(ci)){au.setAttribute('data-src',src(ci));pendingAt=want;au.src=src(ci)}
+ else if(au.readyState>0){pendingAt=null;try{au.currentTime=want}catch(e){}} else pendingAt=want;
+ au.playbackRate=rate;cur='';show(c,cueAt(c,want));
+ $('hpFill').style.width=((want-g.a)/(g.b-g.a)*100)+'%';$('hpTm').textContent=fmt(want-g.a)+' / '+fmt(g.b-g.a);
+ root.querySelectorAll('.hp-ch').forEach((e,j)=>e.classList.toggle('on',j===k));if(play)tryPlay()}
 function init(){
- au.addEventListener('timeupdate',()=>{const c=CH[ci];show(c,cueAt(c,au.currentTime));$('hpFill').style.width=(au.currentTime/c.dur*100)+'%';$('hpTm').textContent=fmt(au.currentTime)+' / '+fmt(c.dur)});
+ au.addEventListener('loadedmetadata',()=>{if(pendingAt!=null){try{au.currentTime=pendingAt}catch(e){}pendingAt=null}});
+ au.addEventListener('timeupdate',()=>{const g=segs[si];if(!g)return;const c=CH[ci];const t=au.currentTime;if(au.paused&&(t<g.a-0.3||t>g.b-0.1))return;show(c,cueAt(c,t));
+  $('hpFill').style.width=(Math.min(1,Math.max(0,(t-g.a)/(g.b-g.a)))*100)+'%';$('hpTm').textContent=fmt(t-g.a)+' / '+fmt(g.b-g.a);
+  if(!au.paused&&g.b<c.dur-0.1&&t>=g.b){ if(si<segs.length-1)loadSeg(si+1,true); else { au.pause(); $('hpSub').textContent='このページの説明は以上です。全体は「使い方」タブで聞けます。'; } }});
  let lastSave=0;au.addEventListener('timeupdate',()=>{if(Date.now()-lastSave>2000){lastSave=Date.now();savePos()}});
- au.addEventListener('play',()=>{au.playbackRate=rate;$('hpPP').textContent='❚❚ 停止'});
+ au.addEventListener('play',()=>{au.playbackRate=rate;$('hpPP').textContent='❚❚ 停止';const g=segs[si];if(g&&g.b<CH[ci].dur-0.1&&au.currentTime>=g.b-0.15){try{au.currentTime=g.a}catch(e){}}});
  au.addEventListener('pause',()=>{$('hpPP').textContent='▶ 再生';savePos()});
- au.addEventListener('ended',()=>{if(ci<CH.length-1)load(ci+1,true);else savePos()});
+ au.addEventListener('ended',()=>{if(si<segs.length-1)loadSeg(si+1,true);else{savePos();if(mode==='page')$('hpSub').textContent='このページの説明は以上です。全体は「使い方」タブで聞けます。'}});
  au.addEventListener('error',()=>{$('hpErr').textContent='音声を読み込めませんでした（'+src(ci).split('?')[0]+'）。通信状況を確認して、ページを読み込み直してください。'});
  $('hpPP').addEventListener('click',()=>au.paused?tryPlay():au.pause());
- $('hpProg').addEventListener('click',e=>{const r=e.currentTarget.getBoundingClientRect();if(au.readyState>0)au.currentTime=(e.clientX-r.left)/r.width*CH[ci].dur});
+ $('hpProg').addEventListener('click',e=>{const g=segs[si];if(!g)return;const r=e.currentTarget.getBoundingClientRect();if(au.readyState>0)au.currentTime=g.a+(e.clientX-r.left)/r.width*(g.b-g.a)});
  const R=[1,1.25,1.5,0.85];let ri=0;$('hpSp').addEventListener('click',()=>{ri=(ri+1)%R.length;rate=R[ri];au.playbackRate=rate;$('hpSp').textContent=rate+'×'});
- $('hpList').innerHTML=CH.map((c,i)=>`<button type="button" class="hp-ch" data-i="${i}"><span>${i+1}. ${c.title}</span><span class="d">${fmt(c.dur)}</span></button>`).join('');
- root.querySelectorAll('.hp-ch').forEach(e=>e.addEventListener('click',()=>load(+e.dataset.i,true)));
- $('hpRestart').addEventListener('click',()=>{$('hpRestart').hidden=true;load(0,true)});
- const P=getPos();
- if(P&&CH[P.i]&&(P.i>0||P.t>3)&&!(P.i===CH.length-1&&P.t>CH[P.i].dur-2)){load(P.i,false,P.t);$('hpSub').textContent='前回の続き（'+CH[P.i].title+' '+fmt(P.t)+'）から再生します。▶ を押してください。';$('hpRestart').hidden=false}
- else{load(0,false);$('hpSub').textContent='▶ を押すと始まります。最後まで続けて流れます。'}
+ $('hpRestart').addEventListener('click',()=>{$('hpRestart').hidden=true;loadSeg(0,true)});
 }
-// カードはダッシュボードの一番下と「使い方」タブの両方に出す（開いているほうへ移す）。音声は body 直下に置き、移動しても止まらないようにする
+// 各タブの一番下に「このページの使い方を聞く」を出す（閉じた状態）。「使い方」タブは全章を開いた状態で出す。音声は body 直下に置く
+const wrap=document.createElement('div');wrap.className='card hp-page';wrap.innerHTML='<button type="button" class="hp-page-btn" id="hpPageBtn" aria-expanded="false">▶ このページの使い方を聞く<span class="note" id="hpPageNote"></span></button>';
+function openPage(open){$('hpPageBtn').setAttribute('aria-expanded',String(open));$('hpPageBtn').firstChild.nodeValue=open?'▼ このページの使い方を閉じる':'▶ このページの使い方を聞く';root.hidden=!open;if(!open&&!au.paused)au.pause()}
 function place(tab){
- if(tab==='dash'||tab==='help'){ const host=$('tab-'+tab); if(root.parentNode!==host) host.appendChild(root); if(!ready){ ready=true; document.body.appendChild(au); init(); } }
- else if(ready && !au.paused) au.pause();
+ if(!ready){ready=true;document.body.appendChild(au);init();wrap.querySelector('#hpPageBtn').addEventListener('click',()=>openPage(root.hidden))}
+ if(!au.paused)au.pause();
+ const host=$('tab-'+tab);if(!host)return;
+ if(tab==='help'){ wrap.remove(); root.hidden=false; host.appendChild(root); setSegs('help');
+  const P=getPos();
+  if(P&&segs[P.i]&&(P.i>0||P.t>3)&&!(P.i===segs.length-1&&P.t>CH[P.i].dur-2)){loadSeg(P.i,false,P.t);$('hpSub').textContent='前回の続き（'+CH[P.i].title+' '+fmt(P.t)+'）から再生します。▶ を押してください。';$('hpRestart').hidden=false}
+  else{loadSeg(0,false);$('hpSub').textContent='▶ を押すと始まります。最後まで続けて流れます。'}
+  return }
+ if(!PAGE[tab]){ wrap.remove(); return }
+ setSegs(tab); if(!segs.length){wrap.remove();return}
+ host.appendChild(wrap); wrap.appendChild(root); openPage(false);
+ $('hpPageNote').textContent='（'+segs.map(g=>g.title).join('・')+'　約'+Math.max(1,Math.round(segs.reduce((a,g)=>a+(g.b-g.a),0)/60))+'分）';
+ loadSeg(0,false); $('hpSub').textContent='▶ を押すと、このページの説明だけが流れます。';
 }
 place('dash');
 return { place };
