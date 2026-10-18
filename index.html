@@ -111,6 +111,10 @@ svg.chart{width:100%;height:auto;display:block}
 .hint{font-size:13px;color:var(--muted);margin:0 0 12px}
 [hidden]{display:none !important}
 .rel-wrap{margin-bottom:12px}
+button.tk-kpi{font:inherit;text-align:left;cursor:pointer;color:var(--ink)}
+button.tk-kpi:hover{border-color:var(--accent)}
+button.tk-kpi.on{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent);background:var(--accent-soft)}
+button.tk-kpi:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
 .tk-owners{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center}
 .tk-own{display:inline-flex;align-items:center;gap:4px;font-size:13px;padding:4px 10px;border:1px solid var(--line);border-radius:999px;background:var(--surface);cursor:pointer;white-space:nowrap}
 .tk-own:has(input:checked){background:var(--accent-soft);border-color:var(--accent)}
@@ -365,7 +369,7 @@ nav.tabs button{padding-left:12px;padding-right:12px}
       <div class="tw"><table id="dashTable"></table></div>
     </div>
     <div class="card">
-      <h2>道場別 目標進捗 <span class="note">実働ベース。目標は「料金マスタ・目標」タブで設定します</span></h2>
+      <h2>道場別 目標進捗 <span class="note">実働ベース。目標は「料金マスタ・目標」タブの一番上で設定します</span> <button type="button" class="ghost" id="goGoals" style="padding:4px 10px;font-size:12px;margin-left:6px">目標を設定する</button></h2>
       <div class="goals" id="goal"></div>
     </div>
     <div class="card">
@@ -849,7 +853,7 @@ const API_URL = "https://script.google.com/macros/s/AKfycbziWNY_XnUyTjyz_3PqkA2u
   const TAIKAI_REASONS = ['進学・受験','部活・他の習い事へ','引っ越し・転勤','時間が合わない（仕事・学校）','費用','本人の意欲低下・飽き','けが・体調','家庭の事情','指導・道場の雰囲気','その他・不明'];
   // 新機能のお知らせ（日付から7日間、ダッシュボード上部に表示。×で閉じると再表示しない）
   const RELEASE_NOTES = [
-    {date:'2026-10-18', items:['各タブの一番下に「▶ このページの使い方を聞く」を追加：そのページの説明だけを音声と画面イメージで聞けます（全章は「使い方」タブ）','タスクの担当をチェックで選ぶ形にしました（塚本代表・田中理事・斉藤理事・平井理事・宮内監事・石川事務局長・江利菜さん・渡辺優作指導員・渡辺和志指導員・事務局・各道場責任者。複数選べます）。担当の絞り込みも人ごとになり、「石川事務局長ほか」なども石川事務局長で出ます','過去の月次入力の新規入会・退会を週ごとの記録に移せるようにしました（管理者が1回押すだけ。日付はその月の入力日か月末の仮置きで、一覧に「過去分・日付は仮」と出ます。内訳の無い人数は「区分不明」）','「AI に聞く」に音声を追加：「🎤 話す」を押して話すとそのまま質問になり、「回答を読み上げる」にチェックすると答えを声で読みます（端末の声。費用なし。音声入力は Firefox 以外のブラウザで使えます）','使い方（音声マニュアル）を10/18版に更新：「入会・退会の記録」と「AI に聞く」の章を追加し、稽古スケジュールの章に「最初に道場の設定で、同時に入れる最大人数とクラスごとの定員を登録する」を追加しました（全12章・約10分）','ダッシュボードの「AI に聞く」とタスクタブの「LINE 通知」を戻しました。AI は週ごとの入退会の記録も見て答えます。使いすぎを防ぐため、質問は1人1日10回まで・全員で月300回まで、要約と理事会コメント案は田中・石川だけが作れます（スプレッドシート側の設定が済むまでは「未設定」と表示されます）','お知らせ欄を「更新履歴」ボタンにしました。普段は閉じていて、押すとこれまでの更新がすべて見られます（新しい更新があると NEW が付きます）','「掲載サイト」タブの候補に15件を追加しました（コドモブースター・ちびスポ・キッズスクールなど。友人の調べた料金で登録、公式ページは未確認）。10月にChatGPT経由で来た見学は、広告ではなく回答で紹介されたものなので「ChatGPT（AIの回答で紹介・無料）」として別に登録しました（ChatGPT広告は未使用のため「未申込」のまま）。タブ上部の「調査結果を反映」を押すと一覧に入ります',
+    {date:'2026-10-18', items:['タスクの上のカードに「完了」を追加し、カード（全タスク・未完了・高優先度・期限超過・次回報告 要・完了）を押すとその一覧に切り替わるようにしました','ダッシュボードの「道場別 目標進捗」に「目標を設定する」ボタンを追加（料金マスタ・目標タブの目標設定に移ります）','各タブの一番下に「▶ このページの使い方を聞く」を追加：そのページの説明だけを音声と画面イメージで聞けます（全章は「使い方」タブ）','タスクの担当をチェックで選ぶ形にしました（塚本代表・田中理事・斉藤理事・平井理事・宮内監事・石川事務局長・江利菜さん・渡辺優作指導員・渡辺和志指導員・事務局・各道場責任者。複数選べます）。担当の絞り込みも人ごとになり、「石川事務局長ほか」なども石川事務局長で出ます','過去の月次入力の新規入会・退会を週ごとの記録に移せるようにしました（管理者が1回押すだけ。日付はその月の入力日か月末の仮置きで、一覧に「過去分・日付は仮」と出ます。内訳の無い人数は「区分不明」）','「AI に聞く」に音声を追加：「🎤 話す」を押して話すとそのまま質問になり、「回答を読み上げる」にチェックすると答えを声で読みます（端末の声。費用なし。音声入力は Firefox 以外のブラウザで使えます）','使い方（音声マニュアル）を10/18版に更新：「入会・退会の記録」と「AI に聞く」の章を追加し、稽古スケジュールの章に「最初に道場の設定で、同時に入れる最大人数とクラスごとの定員を登録する」を追加しました（全12章・約10分）','ダッシュボードの「AI に聞く」とタスクタブの「LINE 通知」を戻しました。AI は週ごとの入退会の記録も見て答えます。使いすぎを防ぐため、質問は1人1日10回まで・全員で月300回まで、要約と理事会コメント案は田中・石川だけが作れます（スプレッドシート側の設定が済むまでは「未設定」と表示されます）','お知らせ欄を「更新履歴」ボタンにしました。普段は閉じていて、押すとこれまでの更新がすべて見られます（新しい更新があると NEW が付きます）','「掲載サイト」タブの候補に15件を追加しました（コドモブースター・ちびスポ・キッズスクールなど。友人の調べた料金で登録、公式ページは未確認）。10月にChatGPT経由で来た見学は、広告ではなく回答で紹介されたものなので「ChatGPT（AIの回答で紹介・無料）」として別に登録しました（ChatGPT広告は未使用のため「未申込」のまま）。タブ上部の「調査結果を反映」を押すと一覧に入ります',
      '入会・退会の入力を1か所にまとめ、「入退会・月次入力」タブにしました：上の①で入会・退会をあった日に1人ずつ記録すると、月曜〜日曜の週ごとに道場別の入会・退会・純増減が出ます（毎週月曜の定例ミーティング用。ダッシュボードにも先週・今週の表を追加）','月次入力（同じタブの③）では新規・退会は入れません（①の記録から自動）。在籍・休会などの会員数を月末に登録してください']},
     {date:'2026-10-15', items:['ダッシュボードに「AI に聞く」を追加：会員数・新規・退会・チラシ・目標・タスクのデータをもとに質問に答え、表示中の月の要約と理事会コメント案も作れます（AI の案なので数字は各タブで確認を）','タスクの期限が過ぎた・3日以内に迫った未完了タスクを、毎朝 LINE で担当者ごとに通知するようにしました（タスクタブの下の「LINE 通知」で、受け取る人の登録と担当者名の設定ができます）']},
     {date:'2026-10-13', items:['ダッシュボードの一番下に「使い方（音声マニュアル）」を表示するようにしました（タブの一番右の「使い方」でも同じものが開きます）','「掲載サイト」タブの候補に「ChatGPT広告」を追加し、各掲載先の料金を10/13に掲載案内ページで確認した内容に直しました（子供の習い事図鑑は無料プランなし・月980円〜、スクルー・スポスルは成果報酬の条件、ほか有料プランの金額）。タブ上部の「調査結果を反映」を押すと入ります。手で書き換えた料金・メモは上書きしません']},
@@ -1611,6 +1615,7 @@ const API_URL = "https://script.google.com/macros/s/AKfycbziWNY_XnUyTjyz_3PqkA2u
       DOJOS.map(d=>{ const g=goals[d.id]||{}; const cur=derive(effRec(nowMonth,d.id).rec,d.id,nowMonth).jitsudo;
         return `<tr><td>${d.name}</td><td><select data-d="${d.id}" data-k="baseMonth">${monthOpts(g.baseMonth||'2026-07')}</select></td><td><input type="number" min="0" step="1" data-d="${d.id}" data-k="base" value="${g.base!=null?g.base:''}" placeholder="自動"></td><td><input type="number" min="0" step="1" data-d="${d.id}" data-k="target" value="${g.target!=null?g.target:''}" placeholder="未設定"></td><td><select data-d="${d.id}" data-k="deadline">${monthOpts(g.deadline||'2027-12')}</select></td><td class="num">${num(cur)}</td></tr>`; }).join('') + '</tbody>';
   }
+  $('goGoals').addEventListener('click', ()=>{ showTab('rates'); const t=$('goalsTable'); if (t) t.scrollIntoView({block:'center'}); });
   $('saveGoals').addEventListener('click', async ()=>{
     const next = {}; DOJOS.forEach(d=>{ next[d.id]={}; });
     $('goalsTable').querySelectorAll('input,select').forEach(el=>{ const v=el.value; next[el.dataset.d][el.dataset.k] = (el.tagName==='INPUT') ? (v===''?null:Math.max(0,Math.round(Number(v)||0))) : v; });
@@ -2634,7 +2639,7 @@ const API_URL = "https://script.google.com/macros/s/AKfycbziWNY_XnUyTjyz_3PqkA2u
   const riskPill = r => { const x=String(r||'').toLowerCase(); return x.startsWith('red')?'<span class="pill red">Red</span>':x.startsWith('yel')?'<span class="pill yellow">Yellow</span>':x.startsWith('gre')?'<span class="pill green">Green</span>':r?`<span class="pill gray">${esc(r)}</span>`:''; };
   const stPill = s => s==='完了'?'green':s==='進行中'?'yellow':s==='保留'?'gray':'red';
   const isOverdue = t => { if (!t.due || t.status==='完了') return false; const d=new Date(String(t.due).replace(/-/g,'/')); return !isNaN(d) && d < new Date(new Date().toDateString()); };
-  ['tkTheme','tkOwner','tkStatus','tkReport','tkSort','tkSearch'].forEach(id=>$(id).addEventListener(id==='tkSearch'?'input':'change', ()=>renderTaskTable()));
+  ['tkTheme','tkOwner','tkStatus','tkReport','tkSort','tkSearch'].forEach(id=>$(id).addEventListener(id==='tkSearch'?'input':'change', ()=>{ if (id==='tkStatus'||id==='tkReport'){ const st=$('tkStatus').value, rp=$('tkReport').checked; tkQuick = rp&&st==='open' ? 'report' : st==='' ? 'all' : st==='完了' ? 'done' : st==='open' ? 'open' : ''; renderTasks(); } else renderTaskTable(); }));
   $('tkReload').addEventListener('click', ()=>refresh(true));
   function renderTasks(){
     if (tasksError){ $('tkNote').textContent='シートを読めませんでした：'+tasksError; }
@@ -2643,13 +2648,26 @@ const API_URL = "https://script.google.com/macros/s/AKfycbziWNY_XnUyTjyz_3PqkA2u
     fill('tkOwner', [...TASK_PEOPLE.map(p=>p.n).filter(n=>tasks.some(t=>ownerPeople(t.owner).includes(n))), ...[...new Set(tasks.filter(t=>t.owner && !ownerPeople(t.owner).length).map(t=>t.owner))]]);
     TK_STATUS = [...new Set(['未着手','進行中','完了','保留', ...tasks.map(t=>t.status).filter(Boolean)])];
     const open = tasks.filter(t=>t.status!=='完了');
-    $('tkKpis').innerHTML = [['全タスク', tasks.length], ['未完了', open.length], ['高優先度（未完了）', open.filter(t=>t.priority==='高').length], ['期限超過', tasks.filter(isOverdue).length], ['次回報告 要', open.filter(t=>t.report==='要').length]]
-      .map(([l,v])=>`<div class="kpi"><div class="l">${l}</div><div class="v num">${v}</div></div>`).join('');
+    // カードを押すと、その一覧に切り替わる
+    const done = tasks.filter(t=>t.status==='完了');
+    $('tkKpis').innerHTML = [['all','全タスク', tasks.length], ['open','未完了', open.length], ['high','高優先度（未完了）', open.filter(t=>t.priority==='高').length], ['overdue','期限超過', tasks.filter(isOverdue).length], ['report','次回報告 要', open.filter(t=>t.report==='要').length], ['done','完了', done.length]]
+      .map(([k,l,v])=>`<button type="button" class="kpi tk-kpi${tkQuick===k?' on':''}" data-q="${k}" aria-pressed="${tkQuick===k}"><div class="l">${l}</div><div class="v num">${v}</div><div class="d">${tkQuick===k?'表示中':'押すと一覧'}</div></button>`).join('');
+    $('tkKpis').querySelectorAll('[data-q]').forEach(b=>b.addEventListener('click', ()=>setTkQuick(b.dataset.q)));
     renderTaskTable();
+  }
+  // 上のカードで選ぶ一覧（全タスク・未完了・高優先度・期限超過・次回報告要・完了）
+  let tkQuick = 'open';
+  function setTkQuick(k){
+    tkQuick = k;
+    $('tkStatus').value = k==='all' ? '' : k==='done' ? '完了' : 'open';
+    $('tkReport').checked = k==='report';
+    $('tkTheme').value=''; $('tkOwner').value=''; $('tkSearch').value='';
+    renderTasks();
+    const t=$('tkTable'); if (t) t.scrollIntoView({block:'start', behavior:'smooth'});
   }
   function renderTaskTable(){
     const th=$('tkTheme').value, ow=$('tkOwner').value, stv=$('tkStatus').value, rp=$('tkReport').checked, q=$('tkSearch').value.trim();
-    const list = tasks.filter(t => (!th||t.theme===th) && (!ow||t.owner===ow||ownerPeople(t.owner).includes(ow)) && (stv==='open'? t.status!=='完了' : !stv || t.status===stv) && (!rp||t.report==='要') && (!q || [t.task,t.reportNote,t.nextAction,t.blocker,t.dod].join(' ').includes(q)));
+    const list = tasks.filter(t => (tkQuick!=='high' || (t.priority==='高' && t.status!=='完了')) && (tkQuick!=='overdue' || isOverdue(t)) && (!th||t.theme===th) && (!ow||t.owner===ow||ownerPeople(t.owner).includes(ow)) && (stv==='open'? t.status!=='完了' : !stv || t.status===stv) && (!rp||t.report==='要') && (!q || [t.task,t.reportNote,t.nextAction,t.blocker,t.dod].join(' ').includes(q)));
     const prioOrd = {高:0,中:1,低:2};
     const dueKey = t => { const d=new Date(String(t.due||'').replace(/-/g,'/')); return t.due && !isNaN(d) ? d.getTime() : Infinity; };  // 期限なしは最後
     const byPrio = (a,b)=> ((prioOrd[a.priority]!=null?prioOrd[a.priority]:3)-(prioOrd[b.priority]!=null?prioOrd[b.priority]:3));
