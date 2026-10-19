@@ -895,11 +895,12 @@ const API_URL = "https://script.google.com/macros/s/AKfycbziWNY_XnUyTjyz_3PqkA2u
   };
   // 目標（実働ベース）。本部はキックオフ決定値。他道場は道場主と決定後に「料金マスタ・目標」で設定
   const DEFAULT_GOALS = {
-    nozawa:  {base:203, baseMonth:'2026-07', target:303, deadline:'2027-12'},
-    hachioji:{base:null, baseMonth:'2026-07', target:null, deadline:'2027-12'},
-    yoga:    {base:null, baseMonth:'2026-07', target:null, deadline:'2027-12'},
-    ueno:    {base:null, baseMonth:'2026-07', target:null, deadline:'2027-12'},
-  };
+      // 起点は2026年7月の実績（実働会員）、目標は起点＋100名、期限は2027年12月
+      nozawa:  {base:203, baseMonth:'2026-07', target:303, deadline:'2027-12'},
+      hachioji:{base:50,  baseMonth:'2026-07', target:150, deadline:'2027-12'},
+      yoga:    {base:61,  baseMonth:'2026-07', target:161, deadline:'2027-12'},
+      ueno:    {base:28,  baseMonth:'2026-07', target:128, deadline:'2027-12'},
+    };
   let goals = JSON.parse(JSON.stringify(DEFAULT_GOALS));
   const MONTHS = [];
   for (let y=2026, m=7; !(y===2028); ) { MONTHS.push(`${y}-${String(m).padStart(2,'0')}`); m++; if(m>12){m=1;y++;} }
@@ -929,7 +930,20 @@ const API_URL = "https://script.google.com/macros/s/AKfycbziWNY_XnUyTjyz_3PqkA2u
   };
   function applyData(d){
     if (d.rates) rates = {...JSON.parse(JSON.stringify(DEFAULT_RATES)), ...d.rates};
-    if (d.goals) goals = {...JSON.parse(JSON.stringify(DEFAULT_GOALS)), ...d.goals};
+    if (d.goals) {
+      goals = JSON.parse(JSON.stringify(DEFAULT_GOALS));
+      Object.keys(d.goals).forEach(id=>{
+        const sv = d.goals[id]||{}, df = goals[id]||{};
+        const m = {...df};
+        const full = sv.base!==''&&sv.base!=null&&sv.target!==''&&sv.target!=null; // 起点・目標が両方入った行だけ保存値を採用
+        if (!full) { goals[id]=m; return; }
+        ['baseMonth','deadline'].forEach(k=>{ if (sv[k]) m[k]=sv[k]; });
+        ['base','target'].forEach(k=>{ if (sv[k]!==''&&sv[k]!=null&&!isNaN(Number(sv[k]))) m[k]=Number(sv[k]); });
+        // 目標が起点より小さい保存値（例：+100の100だけを入れた場合）は無効として既定に戻す
+        if (Number(m.target) <= Number(m.base)) m.target = df.target;
+        goals[id]=m;
+      });
+    }
     flyers = Array.isArray(d.flyers) ? d.flyers : [];
     { const next = d.schedules && typeof d.schedules==='object' ? d.schedules : {}; if (scDirty && schedules[scDojo]) next[scDojo] = schedules[scDojo]; schedules = next; }
     tasks = Array.isArray(d.tasks) ? d.tasks : [];
