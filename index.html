@@ -65,7 +65,7 @@ details.more[open]>summary{margin-bottom:18px}
 .seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;font-weight:400} .seg button{border:0;background:var(--surface);color:var(--muted);padding:4px 12px;font-size:13px;cursor:pointer;font-family:inherit} .seg button[aria-selected="true"]{background:var(--accent);color:#fff}
 #mvDashTable .rt{display:block;font-size:11px;color:var(--muted);white-space:nowrap}
 #mvDashTable .sh,#flTop .sh{display:none} @media(max-width:600px){#mvDashTable .sh,#flTop .sh{display:inline} #mvDashTable .lg,#flTop .lg{display:none} #mvDashTable td,#mvDashTable th,#flTop td,#flTop th{padding:6px 3px;font-size:13px} #mvDashTable .rt{font-size:10px}}
-.tk-files{margin-top:12px;padding-top:10px;border-top:1px dashed var(--line)}.tk-files .tf-h{font-weight:700;font-size:14px}.tk-files .tf-h .note{font-weight:400;font-size:12px;color:var(--muted)}.tf-list{margin:6px 0;padding-left:0;list-style:none}.tf-list li{margin:4px 0}.tf-open{display:inline-block;padding:2px 10px;border:1px solid var(--line);border-radius:6px;text-decoration:none;font-size:13px;margin-right:4px}.tf-pick{display:inline-block;cursor:pointer;padding:6px 12px;border:1px solid var(--line);border-radius:8px;font-size:14px}
+.tk-files{margin-top:12px;padding-top:10px;border-top:1px dashed var(--line)}.tk-files .tf-h{font-weight:700;font-size:14px}.tk-files .tf-h .note{font-weight:400;font-size:12px;color:var(--muted)}.tf-list{margin:6px 0;padding-left:0;list-style:none}.tf-list li{margin:4px 0}.tf-open{display:inline-block;padding:2px 10px;border:1px solid var(--line);border-radius:6px;text-decoration:none;font-size:13px;margin-right:4px}.tk-fcell{min-width:90px;max-width:200px}.tf-cell{display:block;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px;text-decoration:none;margin:1px 0}.tf-pick{display:inline-block;cursor:pointer;padding:6px 12px;border:1px solid var(--line);border-radius:8px;font-size:14px}
 .mt-body{max-height:560px;overflow:auto;border:1px solid var(--line);border-radius:8px;padding:12px 16px;background:var(--input-bg);font-size:14px;line-height:1.7}
 .mt-body .h{font-weight:700;font-size:15px;margin:10px 0 4px}.mt-body .l1{font-weight:700;margin-top:8px}.mt-body .sk{color:var(--muted)}.mt-body .row{border-bottom:1px solid var(--line);padding:4px 0;white-space:pre-wrap}.mt-body .row.hd{font-weight:700}
 .mt-cand{display:grid;grid-template-columns:28px 1fr 170px 150px 70px;gap:8px;align-items:start;padding:8px 0;border-bottom:1px solid var(--line)} .mt-cand input[type=text],.mt-cand input[type=date],.mt-cand select{width:100%} .mt-cand .src{grid-column:2/-1;font-size:12px;color:var(--muted);margin-top:-4px} @media(max-width:720px){.mt-cand{grid-template-columns:28px 1fr 1fr}.mt-cand .ta,.mt-cand .ow{grid-column:2/-1}.mt-cand .du{grid-column-start:2}}
@@ -919,6 +919,7 @@ const API_URL = "https://script.google.com/macros/s/AKfycbziWNY_XnUyTjyz_3PqkA2u
   const TAIKAI_REASONS = ['進学・受験','部活・他の習い事へ','引っ越し・転勤','時間が合わない（仕事・学校）','費用','本人の意欲低下・飽き','けが・体調','家庭の事情','指導・道場の雰囲気','その他・不明'];
   // 新機能のお知らせ（日付から7日間、ダッシュボード上部に表示。×で閉じると再表示しない）
   const RELEASE_NOTES = [
+    {date:'2026-11-16', items:['タスク一覧に「添付」の列を追加しました。添付したファイルの名前がタスクの行に出て、押すとそのまま開けます']},
     {date:'2026-11-16', items:['タスクの添付ファイルが保存できなかった不具合を直しました（スプレッドシート側に添付の保存処理が入っていませんでした）','タスクの「編集」を開いた下の「添付ファイル」で、ファイルを選ぶとその場で保存されるようにしました。保存したファイルは同じ欄に一覧で出て、「開く」を押すと開けます','ファイルを保存しても、編集中のほかの項目は消えません']},
     {date:'2026-11-05', items:['ダッシュボードの「目標への進捗」のパーセントを、目標の増加人数（起点から＋100名）に対して何人増えたかに変えました（例：起点50名から＋10名なら10%。起点より減っているときは0%）','タスクにファイルを添付できるようにしました。タスクの「編集」を開くと下に「添付ファイル」があり、ファイルを選んで「ファイルを追加」を押します（1ファイル20MBまで。保存先は田中さんの Google ドライブ「羅針盤_タスク添付」で、開けるのはそのフォルダを共有された人だけです。添付があるタスクには一覧に📎と件数が出ます。スプレッドシート側を 11/5 第7版に貼り替えると使えます）','会議モード（月耕）はいったん外しました（会議メモタブの表示と「タスクの候補を出す」はそのままです）']},
     {date:'2026-10-26', items:['「会議メモ」タブを追加しました。石川事務局長の会議メモ（Googleドキュメント）を会議の回ごとに表示し、「タスクの候補を出す」を押すと AI がその回から「これから誰かがやること」を候補にします。直してチェックしたものだけ、ボタンでタスクに追加できます（各道場の会員数・入退会の議題は AI に渡しません。候補づくりは田中・石川だけ。スプレッドシート側を 10/26 第6版に貼り替えると使えます）','チラシ配布報告タブの上に、ダッシュボードと同じように数字を大きく出しました（今月／先月：ポスティング枚数、道場前で持っていかれた数、チラシを見て来た体験・入会、反応率。下に道場別の表）','チラシ配布報告タブに「道場前のチラシを記録する」を追加しました。道場の前に置いたチラシを補充した日に、追加日・追加枚数・持っていかれた数を記録します（スプレッドシート側を 10/26 第5版に貼り替えると保存できます）','使い方（音声マニュアル）の第二章（タブは13個）と第七章（会議メモの使い方を追加）を差し替えました','使い方（音声マニュアル）の第五章を、チラシのまとめと道場前のチラシの説明に差し替えました','タスクの担当に「加藤伊織指導員」を追加しました（「加藤」「伊織」と書いてあるタスクも加藤伊織指導員で絞り込めます）']},
@@ -2919,6 +2920,11 @@ const API_URL = "https://script.google.com/macros/s/AKfycbziWNY_XnUyTjyz_3PqkA2u
   }
   // ---- タスクの添付ファイル（田中さんのドライブ「羅針盤_タスク添付」。開けるのはフォルダを共有した人だけ） ----
   const fmtSize = n => n>=1048576 ? (n/1048576).toFixed(1)+'MB' : Math.max(1,Math.round(n/1024))+'KB';
+  // 一覧の「添付」列：ファイル名を押すとそのまま開く
+  function taskFileCellHtml(id){
+    const list = taskFiles.filter(f=>f.taskId===id);
+    return list.map(f=>`<a class="tf-cell" href="${esc(f.url)}" target="_blank" rel="noopener" title="${esc(f.name)} を開く">📎 ${esc(f.name)}</a>`).join('');
+  }
   function taskFileListHtml(id){
     const list = taskFiles.filter(f=>f.taskId===id);
     return list.length ? `<ul class="tf-list">${list.map(f=>`<li><a class="tf-open" href="${esc(f.url)}" target="_blank" rel="noopener" title="${esc(f.name)} を開く">📄 開く</a> <a href="${esc(f.url)}" target="_blank" rel="noopener">${esc(f.name)}</a> <span class="note">${fmtSize(f.size)}・${esc(f.by)}・${esc(String(f.at||'').slice(0,10))}</span> <button type="button" class="ghost" data-tfdel="${esc(f.id)}" style="padding:2px 8px;font-size:12px">削除</button></li>`).join('')}</ul>` : '<div class="note" style="margin:4px 0">まだありません</div>';
@@ -2932,8 +2938,7 @@ const API_URL = "https://script.google.com/macros/s/AKfycbziWNY_XnUyTjyz_3PqkA2u
   // 一覧と📎だけを書き換える（編集中の項目は消さない）
   function refreshTaskFiles(root, id){
     const box=root.querySelector(`[data-tflist="${CSS.escape(id)}"]`); if (box){ box.innerHTML=taskFileListHtml(id); wireTaskFileDel(box); }
-    const cell=root.querySelector(`.tk-task[data-open="${CSS.escape(id)}"]`);
-    if (cell){ cell.querySelectorAll('.chip').forEach(c=>c.remove()); const n=taskFiles.filter(f=>f.taskId===id).length; if (n) cell.insertAdjacentHTML('beforeend', ` <span class="chip" title="添付ファイル ${n}件">📎${n}</span>`); }
+    const cell=root.querySelector(`[data-tfcell="${CSS.escape(id)}"]`); if (cell) cell.innerHTML=taskFileCellHtml(id);
   }
   let tfBusy = 0;
   async function uploadTaskFiles(root, id){
@@ -2974,13 +2979,13 @@ const API_URL = "https://script.google.com/macros/s/AKfycbziWNY_XnUyTjyz_3PqkA2u
     const byId   = (a,b)=> a.id.localeCompare(b.id);
     const sortMode = $('tkSort').value;
     list.sort((a,b)=> sortMode==='prio' ? (byPrio(a,b)||byDue(a,b)||byId(a,b)) : sortMode==='id' ? byId(a,b) : (byDue(a,b)||byPrio(a,b)||byId(a,b)));
-    $('tkTable').innerHTML = `<thead><tr><th>ID</th><th>テーマ</th><th style="text-align:left">Task</th><th>担当</th><th>優先</th><th>Status</th><th>Progress</th><th>実行期限</th><th>報告</th><th>Risk</th><th>最終更新</th><th>編集</th></tr></thead><tbody>` +
-      (list.length? list.map(t=>`<tr class="tk-row" data-id="${esc(t.id)}"><td class="num">${esc(t.id)}</td><td>${esc(t.theme)}</td><td class="tk-task" data-open="${esc(t.id)}">${esc(t.task)}${(()=>{ const n=taskFiles.filter(f=>f.taskId===t.id).length; return n?` <span class="chip" title="添付ファイル ${n}件">📎${n}</span>`:''; })()}</td><td title="${esc(t.owner)}">${(()=>{ const ps=ownerPeople(t.owner); return ps.length ? ps.map(n=>`<span class="chip">${esc(n)}</span>`).join(' ') : esc(t.owner); })()}</td><td><span class="pill ${t.priority==='高'?'red':t.priority==='中'?'yellow':'gray'}">${esc(t.priority)}</span></td>
+    $('tkTable').innerHTML = `<thead><tr><th>ID</th><th>テーマ</th><th style="text-align:left">Task</th><th>担当</th><th>優先</th><th>Status</th><th>Progress</th><th>実行期限</th><th>報告</th><th>Risk</th><th>最終更新</th><th style="text-align:left">添付</th><th>編集</th></tr></thead><tbody>` +
+      (list.length? list.map(t=>`<tr class="tk-row" data-id="${esc(t.id)}"><td class="num">${esc(t.id)}</td><td>${esc(t.theme)}</td><td class="tk-task" data-open="${esc(t.id)}">${esc(t.task)}</td><td title="${esc(t.owner)}">${(()=>{ const ps=ownerPeople(t.owner); return ps.length ? ps.map(n=>`<span class="chip">${esc(n)}</span>`).join(' ') : esc(t.owner); })()}</td><td><span class="pill ${t.priority==='高'?'red':t.priority==='中'?'yellow':'gray'}">${esc(t.priority)}</span></td>
         <td><select class="tk-st" data-tkst="${esc(t.id)}" title="ここで変えるとシートに保存されます">${optList(TK_STATUS, t.status)}</select></td>
         <td class="num">${esc(t.progress)||'—'}</td>
-        <td class="num ${isOverdue(t)?'overdue':''}">${esc(t.due)}</td><td>${t.report==='要'?'<span class="pill yellow">要</span>':esc(t.report)}</td><td>${riskPill(t.risk)}</td><td class="num" style="color:var(--muted);font-size:12px">${esc(t.lastUpdate)}</td><td><button type="button" class="ghost tk-edit" data-open="${esc(t.id)}" aria-expanded="${tkOpen===t.id}">${tkOpen===t.id?'閉じる':'編集'}</button></td></tr>` +
-        (tkOpen===t.id ? `<tr class="tk-detail"><td colspan="12">${taskFormHtml(t, 'e')}${taskFilesHtml(t)}<div class="actions" style="margin-top:8px"><button type="button" class="primary" data-tksave="${esc(t.id)}">シートに保存</button><button type="button" class="ghost" data-tkclose="1">閉じる</button><span class="msg" id="tkEditMsg"></span><span class="msg" style="margin-left:auto">最終更新 ${esc(t.lastUpdate)||'—'}　出典 ${esc(t.source)||'—'}</span></div></td></tr>` : '')).join('')
-      : `<tr><td colspan="12" style="text-align:center;color:var(--muted)">該当するタスクがありません</td></tr>`) + '</tbody>';
+        <td class="num ${isOverdue(t)?'overdue':''}">${esc(t.due)}</td><td>${t.report==='要'?'<span class="pill yellow">要</span>':esc(t.report)}</td><td>${riskPill(t.risk)}</td><td class="num" style="color:var(--muted);font-size:12px">${esc(t.lastUpdate)}</td><td class="tk-fcell" data-tfcell="${esc(t.id)}">${taskFileCellHtml(t.id)}</td><td><button type="button" class="ghost tk-edit" data-open="${esc(t.id)}" aria-expanded="${tkOpen===t.id}">${tkOpen===t.id?'閉じる':'編集'}</button></td></tr>` +
+        (tkOpen===t.id ? `<tr class="tk-detail"><td colspan="13">${taskFormHtml(t, 'e')}${taskFilesHtml(t)}<div class="actions" style="margin-top:8px"><button type="button" class="primary" data-tksave="${esc(t.id)}">シートに保存</button><button type="button" class="ghost" data-tkclose="1">閉じる</button><span class="msg" id="tkEditMsg"></span><span class="msg" style="margin-left:auto">最終更新 ${esc(t.lastUpdate)||'—'}　出典 ${esc(t.source)||'—'}</span></div></td></tr>` : '')).join('')
+      : `<tr><td colspan="13" style="text-align:center;color:var(--muted)">該当するタスクがありません</td></tr>`) + '</tbody>';
     wireOwnerPicker($('tkTable'));
     $('tkTable').querySelectorAll('[data-open]').forEach(el=>el.addEventListener('click', ()=>{ tkOpen = tkOpen===el.dataset.open ? null : el.dataset.open; renderTaskTable(); }));
     $('tkTable').querySelectorAll('[data-tkclose]').forEach(el=>el.addEventListener('click', ()=>{ tkOpen=null; renderTaskTable(); }));
