@@ -63,8 +63,8 @@ details.more>summary::-webkit-details-marker{display:none} details.more>summary 
 details.more>summary::after{content:"▾ 開く";font-weight:400;color:var(--muted);font-size:14px;margin-left:auto;white-space:nowrap} details.more[open]>summary::after{content:"▴ 閉じる"}
 details.more[open]>summary{margin-bottom:18px}
 .seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;font-weight:400} .seg button{border:0;background:var(--surface);color:var(--muted);padding:4px 12px;font-size:13px;cursor:pointer;font-family:inherit} .seg button[aria-selected="true"]{background:var(--accent);color:#fff}
-#mvDashTable{font-size:20px;min-width:640px} #mvDashTable th{font-size:15px;padding:8px 6px;white-space:nowrap;text-align:center} #mvDashTable td{padding:10px 6px;text-align:center} #mvDashTable td.dj{text-align:left;font-size:17px;font-weight:600;white-space:nowrap} #mvDashTable .z{color:var(--muted);opacity:.55} #mvDashTable th.rg{border-bottom:1px solid var(--line)} #mvDashTable th.rc,#mvDashTable td.rc{background:var(--accent-soft)} #mvDashTable td.in,#mvDashTable th.in{border-right:2px solid var(--line)} #mvDashTable tr.total td{font-weight:700;border-top:2px solid var(--line)} #mvDashRate{font-size:15px} #mvDashTable thead tr:first-child th:first-child,#mvDashTable td.dj{position:sticky;left:0;z-index:1;background:var(--surface)} #mvDashTable tr.total td.dj{background:var(--surface2)}
-#mvDashTable .sh,#flTop .sh{display:none} @media(max-width:600px){#mvDashTable .sh,#flTop .sh{display:inline} #mvDashTable .lg,#flTop .lg{display:none} #flTop td,#flTop th{padding:6px 3px;font-size:13px} #mvDashTable{font-size:18px;min-width:560px} #mvDashTable th{font-size:13px;padding:6px 4px} #mvDashTable td{padding:8px 4px} #mvDashTable td.dj{font-size:15px}}
+#mvDashTable{font-size:20px;min-width:640px} #mvDashTable th{font-size:15px;padding:8px 6px;white-space:nowrap;text-align:center} #mvDashTable td{padding:10px 6px;text-align:center} #mvDashTable td.dj{text-align:left;font-size:17px;font-weight:600;white-space:nowrap} #mvDashTable .z{color:var(--muted);opacity:.55} #mvDashTable tr.total td{font-weight:700;border-top:2px solid var(--line)} #mvDashRate{font-size:15px} #mvDashTable th:first-child,#mvDashTable td.dj{position:sticky;left:0;z-index:1;background:var(--surface)} #mvDashTable tr.total td.dj{background:var(--surface2)} #flTop{font-size:20px;min-width:640px} #flTop th{font-size:15px;padding:8px 6px;white-space:nowrap;text-align:center} #flTop td{padding:10px 6px;text-align:center} #flTop td:first-child{text-align:left;font-size:17px;font-weight:600;white-space:nowrap} #flTop th:first-child{text-align:left} #flTop .z{color:var(--muted);opacity:.55} #flTop tr.total td{font-weight:700;border-top:2px solid var(--line)} #flTop th:first-child,#flTop td:first-child{position:sticky;left:0;z-index:1;background:var(--surface)} #flTop tr.total td:first-child{background:var(--surface2)}
+#mvDashTable .sh,#flTop .sh{display:none} @media(max-width:600px){#mvDashTable .sh,#flTop .sh{display:inline} #mvDashTable .lg,#flTop .lg{display:none} #mvDashTable,#flTop{font-size:18px;min-width:560px} #mvDashTable th,#flTop th{font-size:13px;padding:6px 4px} #mvDashTable td,#flTop td{padding:8px 4px} #mvDashTable td.dj,#flTop td:first-child{font-size:15px}}
 .tk-files{margin-top:12px;padding-top:10px;border-top:1px dashed var(--line)}.tk-files .tf-h{font-weight:700;font-size:14px}.tk-files .tf-h .note{font-weight:400;font-size:12px;color:var(--muted)}.tf-list{margin:6px 0;padding-left:0;list-style:none}.tf-list li{margin:4px 0}.tf-open{display:inline-block;padding:2px 10px;border:1px solid var(--line);border-radius:6px;text-decoration:none;font-size:13px;margin-right:4px}.tk-fcell{min-width:90px;max-width:200px}.tf-cell{display:block;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px;text-decoration:none;margin:1px 0}.tf-pick{display:inline-block;cursor:pointer;padding:6px 12px;border:1px solid var(--line);border-radius:8px;font-size:14px}
 .mt-body{max-height:560px;overflow:auto;border:1px solid var(--line);border-radius:8px;padding:12px 16px;background:var(--input-bg);font-size:14px;line-height:1.7}
 .mt-body .h{font-weight:700;font-size:15px;margin:10px 0 4px}.mt-body .l1{font-weight:700;margin-top:8px}.mt-body .sk{color:var(--muted)}.mt-body .row{border-bottom:1px solid var(--line);padding:4px 0;white-space:pre-wrap}.mt-body .row.hd{font-weight:700}
@@ -335,8 +335,7 @@ nav.tabs button{padding-left:12px;padding-right:12px}
 </header>
 <nav class="tabs" role="tablist">
   <button role="tab" aria-selected="true" data-tab="dash">ダッシュボード</button>
-  <button role="tab" aria-selected="false" data-tab="input">入退会・月次入力</button>
-  <button role="tab" aria-selected="false" data-tab="flyer">チラシ配布報告</button>
+  <button role="tab" aria-selected="false" data-tab="input">入退会・チラシ・月次入力</button>
   <button role="tab" aria-selected="false" data-tab="sched">稽古スケジュール</button>
   <button role="tab" aria-selected="false" data-tab="tasks">タスク</button>
   <button role="tab" aria-selected="false" data-tab="mtg">会議メモ</button>
@@ -374,6 +373,15 @@ nav.tabs button{padding-left:12px;padding-right:12px}
       <div class="tw"><table id="mvDashTable"></table></div>
       <div class="msg num" id="mvDashRate" style="margin-top:8px"></div>
       <div class="actions" style="margin-top:8px"><button type="button" class="ghost" id="mvDashGo" style="padding:6px 12px">週ごとの集計を見る</button><button type="button" class="ghost" id="mvDashRec" style="padding:6px 12px">体験・入会・退会を記録する</button></div>
+    </div>
+    <div class="card" id="flDashCard">
+      <div class="toolbar" style="margin-bottom:10px"><h2 class="dash-sec" style="margin:0" id="flHead">チラシのまとめ</h2><span class="seg" id="flSeg"><button type="button" data-p="cur">今月</button><button type="button" data-p="prev">先月</button></span></div>
+    <div class="kpis" id="flKpis"></div>
+      <div style="margin-top:12px">
+      <h2 style="font-size:15px">道場別 <span class="note" id="flTopNote">ポスティングと道場前のチラシ、チラシを見て来た体験・入会</span></h2>
+      <div class="tw"><table id="flTop"></table></div>
+    </div>
+      <div class="actions" style="margin-top:8px"><button type="button" class="ghost" id="flDashRec" style="padding:6px 12px">チラシを記録する</button></div>
     </div>
     <details class="more" id="dashMore">
       <summary><span>くわしく見る</span><span class="note">在籍・売上・審査会・チラシ、道場別の当月実績、登録状況、新規入会と退会の内訳、AI に聞く</span></summary>
@@ -418,7 +426,7 @@ nav.tabs button{padding-left:12px;padding-right:12px}
   <!-- ===== Input ===== -->
   <!-- ===== Moves (weekly) ===== -->
   <section id="tab-input" hidden>
-    <nav class="in-jump" aria-label="このページ内の移動"><a href="#mvRecord">① 入会・退会を記録</a><a href="#mvWeekly">② 週ごとの集計</a><a href="#monthlyInput">③ 月末の会員数（月次入力）</a></nav>
+    <nav class="in-jump" aria-label="このページ内の移動"><a href="#mvRecord">① 体験・入会・退会</a><a href="#flyerInput">② チラシ</a><a href="#monthlyInput">③ 月末の会員数</a><a href="#mvWeekly">④ 週ごとの集計</a><a href="#flyerRef">⑤ チラシの地図・履歴</a></nav>
     <div class="card" id="mvRecord">
       <h2>① 体験・入会・退会を記録する <span class="note">体験の申込・体験に来た日・入会・退会を、あった日にその場で1人ずつ記録します（同じ区分・経路なら人数をまとめても可）。入会と退会がある月は、月次入力の「新規」「退会」とその内訳がここから自動で入ります。体験申込・体験は月次の会員数には入りません</span></h2>
       <form id="mvForm" autocomplete="off">
@@ -436,35 +444,47 @@ nav.tabs button{padding-left:12px;padding-right:12px}
         <div class="actions"><button type="submit" class="primary" id="mvSave">記録する</button><span class="msg" id="mvMsg"></span></div>
       </form>
     </div>
-    <h2 class="in-sec" id="mvWeekly">② 週ごとの集計 <span class="note">月曜〜日曜。月曜の定例ミーティングでは「先週」を見ます</span></h2>
-    <div class="toolbar">
-      <label>週 <select id="mvWeekSel"></select></label>
-      <button type="button" class="ghost" id="mvPrevWeek" style="padding:6px 10px">◀ 前の週</button>
-      <button type="button" class="ghost" id="mvLastWeek" style="padding:6px 10px">先週</button>
-      <button type="button" class="ghost" id="mvThisWeek" style="padding:6px 10px">今週</button>
-      <button type="button" class="ghost" id="mvNextWeek" style="padding:6px 10px">次の週 ▶</button>
-      <span class="msg" id="mvNote"></span>
+    
+    <h2 class="in-sec" id="flyerInput">② チラシを記録する <span class="note">道場前のチラシを補充した日と、ポスティングをした日に記録します</span></h2>
+    <div class="card" id="rackCard">
+      <h2>道場前のチラシを記録する <span class="note">道場の前に置いたチラシを補充したら、その日に記録します。「持っていかれた数」は、前に記録してから減った枚数です（補充前に残りを数えて、前回置いた数から引く）</span></h2>
+      <form id="rackForm" autocomplete="off">
+        <div class="form-grid" style="margin-bottom:12px">
+          <div class="field"><label for="rk_dojo">道場</label><select id="rk_dojo"></select></div>
+          <div class="field"><label for="rk_date">追加日</label><input type="date" id="rk_date" required></div>
+          <div class="field"><label for="rk_added">追加枚数</label><input type="number" id="rk_added" min="0" step="1" inputmode="numeric" placeholder="0"></div>
+          <div class="field"><label for="rk_taken">持っていかれた数</label><input type="number" id="rk_taken" min="0" step="1" inputmode="numeric" placeholder="0"></div>
+          <div class="field wide"><label for="rk_memo">メモ（任意。氏名は書かない）</label><input type="text" id="rk_memo" placeholder="例：雨で濡れて10枚交換"></div>
+        </div>
+        <div class="actions"><button type="submit" class="primary" id="rackSave">記録する</button><span class="msg" id="rackMsg"></span></div>
+      </form>
+      <div class="tw" style="margin-top:14px"><table id="rackList"></table></div>
     </div>
-    <div class="kpis" id="mvKpis"></div>
-    <div class="card">
-      <h2>道場別 この週の入退会</h2>
-      <div class="tw"><table id="mvTable"></table></div>
+    <div class="grid2">
+      <div class="card">
+        <h2>ポスティングを報告する <span class="note">配布したその日に、枚数を入れるだけ。Googleフォームからの報告もここに並びます</span></h2>
+        <form id="flyerForm" autocomplete="off">
+          <div class="form-grid" style="margin-bottom:12px">
+            <div class="field"><label for="fl_dojo">道場</label><select id="fl_dojo"></select></div>
+            <div class="field"><label for="fl_date">配布日</label><input type="date" id="fl_date" required></div>
+            <div class="field"><label for="fl_count">配布枚数</label><input type="number" id="fl_count" min="1" step="1" inputmode="numeric" required></div>
+            <div class="field wide"><label for="fl_area">配布エリア（町名＋丁目を入れると地図に塗られます）</label><input type="text" id="fl_area" placeholder="例：野沢3丁目、下馬6丁目"></div>
+            <div class="field wide"><label for="fl_by">配布者</label><input type="text" id="fl_by" placeholder="例：山田"></div>
+            <div class="field wide"><label for="fl_memo">メモ（任意）</label><input type="text" id="fl_memo" placeholder="例：反応が良かった、雨で途中終了 など"></div>
+          </div>
+          <div class="actions">
+            <button type="submit" class="primary" id="flyerSave">報告する</button>
+            <span class="msg" id="flyerMsg"></span>
+          </div>
+        </form>
+      </div>
+      <div class="card">
+        <h2>当月のポスティング <span class="note" id="flyerMonthNote"></span></h2>
+        <div class="tw"><table id="flyerSummary"></table></div>
+        <p class="hint" style="margin-top:12px">月次入力の「チラシ配布枚数」を空欄にしておくと、ここで報告された枚数の合計が自動でダッシュボードに使われます。</p>
+      </div>
     </div>
-    <div class="card">
-      <h2>週ごとの推移 <span class="note">直近12週。道場の列は「入会 ／ 退会」</span></h2>
-      <div class="tw"><table id="mvTrend"></table></div>
-    </div>
-    <div class="card">
-      <h2>記録一覧 <span class="note" id="mvListNote"></span></h2>
-      <div class="toolbar"><label>道場 <select id="mvListDojo"><option value="">全道場</option></select></label><label style="display:flex;align-items:center;gap:6px"><input type="checkbox" id="mvListAll"> すべての週を表示</label></div>
-      <div class="tw"><table id="mvList"></table></div>
-    </div>
-    <div class="card" id="mvImportCard" hidden>
-      <h2>過去の月次入力を週ごとの記録に移す <span class="note">管理者だけに表示。1回押せば済みます</span></h2>
-      <p style="margin:0 0 10px;font-size:13px;line-height:1.7">これまで月次入力に入れた新規入会・退会（内訳を含む）を、この週次の記録に移します。実際の日付は分からないため、<b>その月の月次入力を保存した日</b>（その月の中なら）か<b>月末</b>を仮の日付にし、一覧に「過去分・日付は仮」と付けます。内訳の無い人数は「区分不明」になります。月ごとの人数は変わりません。すでに週次の記録がある道場・月は移しません。</p>
-      <div class="actions"><button type="button" class="ghost" id="mvImportPreview">移す内容を確認する</button><button type="button" class="primary" id="mvImportRun" hidden>この内容で移す</button><span class="msg" id="mvImportMsg"></span></div>
-      <div class="tw" id="mvImportBox" hidden style="margin-top:10px"></div>
-    </div>
+
     <h2 class="in-sec" id="monthlyInput">③ 月末の会員数（月次入力） <span class="note">在籍・休会など区分ごとの人数を月末に入れます。新規・退会は①の記録から自動で入ります</span></h2>
     <div class="card">
       <h2>登録状況 <span class="note">数字は実働会員。セルを押すとその道場・月の入力に移ります</span></h2>
@@ -514,29 +534,43 @@ nav.tabs button{padding-left:12px;padding-right:12px}
         </div>
       </form>
     </div>
-  </section>
-
-  <!-- ===== Flyer ===== -->
-  <section id="tab-flyer" hidden>
-    <div class="toolbar"><h2 class="dash-sec" style="margin:0" id="flHead">チラシのまとめ</h2><span class="seg" id="flSeg"><button type="button" data-p="cur">今月</button><button type="button" data-p="prev">先月</button></span></div>
-    <div class="kpis" id="flKpis"></div>
-    <div class="card">
-      <h2>道場別 <span class="note" id="flTopNote">ポスティングと道場前のチラシ、チラシを見て来た体験・入会</span></h2>
-      <div class="tw"><table id="flTop"></table></div>
+    <h2 class="in-sec" id="mvWeekly">④ 週ごとの集計（見るだけ） <span class="note">月曜〜日曜。月曜の定例ミーティングでは「先週」を見ます</span></h2>
+    <div class="toolbar">
+      <label>週 <select id="mvWeekSel"></select></label>
+      <button type="button" class="ghost" id="mvPrevWeek" style="padding:6px 10px">◀ 前の週</button>
+      <button type="button" class="ghost" id="mvLastWeek" style="padding:6px 10px">先週</button>
+      <button type="button" class="ghost" id="mvThisWeek" style="padding:6px 10px">今週</button>
+      <button type="button" class="ghost" id="mvNextWeek" style="padding:6px 10px">次の週 ▶</button>
+      <span class="msg" id="mvNote"></span>
     </div>
-    <div class="card" id="rackCard">
-      <h2>道場前のチラシを記録する <span class="note">道場の前に置いたチラシを補充したら、その日に記録します。「持っていかれた数」は、前に記録してから減った枚数です（補充前に残りを数えて、前回置いた数から引く）</span></h2>
-      <form id="rackForm" autocomplete="off">
-        <div class="form-grid" style="margin-bottom:12px">
-          <div class="field"><label for="rk_dojo">道場</label><select id="rk_dojo"></select></div>
-          <div class="field"><label for="rk_date">追加日</label><input type="date" id="rk_date" required></div>
-          <div class="field"><label for="rk_added">追加枚数</label><input type="number" id="rk_added" min="0" step="1" inputmode="numeric" placeholder="0"></div>
-          <div class="field"><label for="rk_taken">持っていかれた数</label><input type="number" id="rk_taken" min="0" step="1" inputmode="numeric" placeholder="0"></div>
-          <div class="field wide"><label for="rk_memo">メモ（任意。氏名は書かない）</label><input type="text" id="rk_memo" placeholder="例：雨で濡れて10枚交換"></div>
-        </div>
-        <div class="actions"><button type="submit" class="primary" id="rackSave">記録する</button><span class="msg" id="rackMsg"></span></div>
-      </form>
-      <div class="tw" style="margin-top:14px"><table id="rackList"></table></div>
+    <div class="kpis" id="mvKpis"></div>
+    <div class="card">
+      <h2>道場別 この週の入退会</h2>
+      <div class="tw"><table id="mvTable"></table></div>
+    </div>
+    <div class="card">
+      <h2>週ごとの推移 <span class="note">直近12週。道場の列は「入会 ／ 退会」</span></h2>
+      <div class="tw"><table id="mvTrend"></table></div>
+    </div>
+    <div class="card">
+      <h2>記録一覧 <span class="note" id="mvListNote"></span></h2>
+      <div class="toolbar"><label>道場 <select id="mvListDojo"><option value="">全道場</option></select></label><label style="display:flex;align-items:center;gap:6px"><input type="checkbox" id="mvListAll"> すべての週を表示</label></div>
+      <div class="tw"><table id="mvList"></table></div>
+    </div>
+    <div class="card" id="mvImportCard" hidden>
+      <h2>過去の月次入力を週ごとの記録に移す <span class="note">管理者だけに表示。1回押せば済みます</span></h2>
+      <p style="margin:0 0 10px;font-size:13px;line-height:1.7">これまで月次入力に入れた新規入会・退会（内訳を含む）を、この週次の記録に移します。実際の日付は分からないため、<b>その月の月次入力を保存した日</b>（その月の中なら）か<b>月末</b>を仮の日付にし、一覧に「過去分・日付は仮」と付けます。内訳の無い人数は「区分不明」になります。月ごとの人数は変わりません。すでに週次の記録がある道場・月は移しません。</p>
+      <div class="actions"><button type="button" class="ghost" id="mvImportPreview">移す内容を確認する</button><button type="button" class="primary" id="mvImportRun" hidden>この内容で移す</button><span class="msg" id="mvImportMsg"></span></div>
+      <div class="tw" id="mvImportBox" hidden style="margin-top:10px"></div>
+    </div>
+    <h2 class="in-sec" id="flyerRef">⑤ チラシの地図・履歴（見るだけ） <span class="note">配った場所の地図、ポスティングの報告履歴、スマホ用の報告フォーム</span></h2>
+    <div class="card" id="flyerMapCard">
+      <h2>チラシ配布マップ <span class="note">道場から半径1.5kmの町丁目。配った町丁目ほど濃く塗られます。白い町丁目が「まだ配っていない」場所です</span></h2>
+      <div id="flyerMapRoot"></div>
+    </div>
+    <div class="card">
+      <h2>ポスティングの報告履歴 <span class="note">新しい順・直近60件</span></h2>
+      <div class="tw"><table id="flyerList"></table></div>
     </div>
     <div class="card" style="margin-bottom:14px">
       <h2>Googleフォームで報告する <span class="note">スマホから報告する道場主・配布スタッフには、このURLを共有してください。フォームの回答もこの下の一覧に並びます</span></h2>
@@ -547,39 +581,9 @@ nav.tabs button{padding-left:12px;padding-right:12px}
         <span class="msg" id="flyerCopyMsg"></span>
       </div>
     </div>
-    <div class="card" id="flyerMapCard">
-      <h2>チラシ配布マップ <span class="note">道場から半径1.5kmの町丁目。配った町丁目ほど濃く塗られます。白い町丁目が「まだ配っていない」場所です</span></h2>
-      <div id="flyerMapRoot"></div>
-    </div>
-    <div class="grid2">
-      <div class="card">
-        <h2>ポスティングを報告する <span class="note">配布したその日に、枚数を入れるだけ。Googleフォームからの報告もここに並びます</span></h2>
-        <form id="flyerForm" autocomplete="off">
-          <div class="form-grid" style="margin-bottom:12px">
-            <div class="field"><label for="fl_dojo">道場</label><select id="fl_dojo"></select></div>
-            <div class="field"><label for="fl_date">配布日</label><input type="date" id="fl_date" required></div>
-            <div class="field"><label for="fl_count">配布枚数</label><input type="number" id="fl_count" min="1" step="1" inputmode="numeric" required></div>
-            <div class="field wide"><label for="fl_area">配布エリア（町名＋丁目を入れると地図に塗られます）</label><input type="text" id="fl_area" placeholder="例：野沢3丁目、下馬6丁目"></div>
-            <div class="field wide"><label for="fl_by">配布者</label><input type="text" id="fl_by" placeholder="例：山田"></div>
-            <div class="field wide"><label for="fl_memo">メモ（任意）</label><input type="text" id="fl_memo" placeholder="例：反応が良かった、雨で途中終了 など"></div>
-          </div>
-          <div class="actions">
-            <button type="submit" class="primary" id="flyerSave">報告する</button>
-            <span class="msg" id="flyerMsg"></span>
-          </div>
-        </form>
-      </div>
-      <div class="card">
-        <h2>当月のポスティング <span class="note" id="flyerMonthNote"></span></h2>
-        <div class="tw"><table id="flyerSummary"></table></div>
-        <p class="hint" style="margin-top:12px">月次入力の「チラシ配布枚数」を空欄にしておくと、ここで報告された枚数の合計が自動でダッシュボードに使われます。</p>
-      </div>
-    </div>
-    <div class="card">
-      <h2>ポスティングの報告履歴 <span class="note">新しい順・直近60件</span></h2>
-      <div class="tw"><table id="flyerList"></table></div>
-    </div>
   </section>
+
+  <!-- ===== Flyer ===== -->
 
   <!-- ===== Schedule ===== -->
   <section id="tab-sched" hidden>
@@ -925,7 +929,7 @@ const API_URL = "https://script.google.com/macros/s/AKfycbziWNY_XnUyTjyz_3PqkA2u
   const TAIKAI_REASONS = ['進学・受験','部活・他の習い事へ','引っ越し・転勤','時間が合わない（仕事・学校）','費用','本人の意欲低下・飽き','けが・体調','家庭の事情','指導・道場の雰囲気','その他・不明'];
   // 新機能のお知らせ（日付から7日間、ダッシュボード上部に表示。×で閉じると再表示しない）
   const RELEASE_NOTES = [
-    {date:'2026-11-20', items:['ダッシュボードの「先週・今週の動き」の表を大きくし、入会の経路を「チラシ・紹介・web・SNS・家族兄弟」の5列に分けて、ほかの数字と同じ大きさで出すようにしました','入会の経路を、記録・月次入力・ダッシュボードの内訳・月別の推移など、すべての画面で「チラシ・紹介・web・SNS・家族兄弟」の5つにしました（SNS と web を分けました）','これまでの「SNS・web」の数字は「SNS」として数えます。web だった記録は、記録一覧で削除して経路「web」で入れ直してください','スプレッドシート側（Apps Script）は 11/20 第8版に貼り替えてください（web を保存するために必要です。年間入力シートの N列は SNS と web の合計のまま、AF列に web の人数が入ります）','使い方（書面・音声）を11/20版に更新しました。音声版は画面イメージの経路を5つに直しました（読み上げの内容は変わりません）']},
+    {date:'2026-11-20', items:['ダッシュボードの「先週・今週の動き」の表を大きくし、入会の経路を「チラシ・紹介・web・SNS・家族兄弟」の5列に分けて、ほかの数字と同じ大きさで出すようにしました','入会の経路を、記録・月次入力・ダッシュボードの内訳・月別の推移など、すべての画面で「チラシ・紹介・web・SNS・家族兄弟」の5つにしました（SNS と web を分けました）','これまでの「SNS・web」の数字は「SNS」として数えます。web だった記録は、記録一覧で削除して経路「web」で入れ直してください','スプレッドシート側（Apps Script）は 11/20 第8版に貼り替えてください（web を保存するために必要です。年間入力シートの N列は SNS と web の合計のまま、AF列に web の人数が入ります）','使い方（書面・音声）を11/20版に更新しました。音声版は画面イメージの経路を5つに直しました（読み上げの内容は変わりません）','ダッシュボード：「先週・今週の動き」の表の色分けと上の見出し行をやめて1行の見出しにし、その下に「チラシのまとめ」（今月／先月・道場別）を出すようにしました','入力のページを1つにまとめました（タブ名「入退会・チラシ・月次入力」）。上から ① 体験・入会・退会 → ② チラシ（道場前・ポスティング）→ ③ 月末の会員数 → ④ 週ごとの集計（見るだけ）の順に並べ、道場主が上から順に入れられるようにしました。「チラシ配布報告」タブはこのページに入りました']},
     {date:'2026-11-16', items:['タスク一覧に「添付」の列を追加しました。添付したファイルの名前がタスクの行に出て、押すとそのまま開けます']},
     {date:'2026-11-16', items:['タスクの添付ファイルが保存できなかった不具合を直しました（スプレッドシート側に添付の保存処理が入っていませんでした）','タスクの「編集」を開いた下の「添付ファイル」で、ファイルを選ぶとその場で保存されるようにしました。保存したファイルは同じ欄に一覧で出て、「開く」を押すと開けます','ファイルを保存しても、編集中のほかの項目は消えません']},
     {date:'2026-11-05', items:['ダッシュボードの「目標への進捗」のパーセントを、目標の増加人数（起点から＋100名）に対して何人増えたかに変えました（例：起点50名から＋10名なら10%。起点より減っているときは0%）','タスクにファイルを添付できるようにしました。タスクの「編集」を開くと下に「添付ファイル」があり、ファイルを選んで「ファイルを追加」を押します（1ファイル20MBまで。保存先は田中さんの Google ドライブ「羅針盤_タスク添付」で、開けるのはそのフォルダを共有された人だけです。添付があるタスクには一覧に📎と件数が出ます。スプレッドシート側を 11/5 第7版に貼り替えると使えます）','会議モード（月耕）はいったん外しました（会議メモタブの表示と「タスクの候補を出す」はそのままです）']},
@@ -1319,13 +1323,12 @@ const API_URL = "https://script.google.com/macros/s/AKfycbziWNY_XnUyTjyz_3PqkA2u
   // ---------- tabs ----------
   document.querySelectorAll('nav.tabs button').forEach(b => b.addEventListener('click', () => {
     document.querySelectorAll('nav.tabs button').forEach(x=>x.setAttribute('aria-selected', String(x===b)));
-    ['dash','input','flyer','sched','tasks','mtg','tour','news','trend','rates'].concat(['portal','ads','help']).forEach(t => $('tab-'+t).hidden = (t!==b.dataset.tab));
+    ['dash','input','sched','tasks','mtg','tour','news','trend','rates'].concat(['portal','ads','help']).forEach(t => $('tab-'+t).hidden = (t!==b.dataset.tab));
     if (window.helpUI) window.helpUI.place(b.dataset.tab);
     if (b.dataset.tab==='portal') portalUI.render();
-    if (b.dataset.tab==='input') renderMoves();
+    if (b.dataset.tab==='input'){ renderMoves(); renderFlyers(); }
     if (b.dataset.tab==='ads') adsUI.render();
     if (b.dataset.tab==='trend') renderTrend();
-    if (b.dataset.tab==='flyer') renderFlyers();
     if (b.dataset.tab==='sched') renderSched();
     if (b.dataset.tab==='tasks'){ renderTasks(); renderTaskLineCard(); }
     if (b.dataset.tab==='mtg') renderMeeting(false);
@@ -2370,11 +2373,11 @@ const API_URL = "https://script.google.com/macros/s/AKfycbziWNY_XnUyTjyz_3PqkA2u
     $('mvDashSeg').querySelectorAll('button').forEach(b=>b.setAttribute('aria-selected', b.dataset.p===mvDashP?'true':'false'));
     const pick = dojo => mvDashP==='last' ? movesIn(last,dojo) : mvDashP==='cur' ? movesIn(cur,dojo) : moves.filter(x=>x.date.slice(0,7)===mo && (!dojo||x.dojo===dojo));
     $('mvDashNote').textContent = mvDashP==='last' ? `先週 ${fmtWeek(last)}` : mvDashP==='cur' ? `今週 ${fmtWeek(cur)}（途中）` : `${fmtMonth(mo)} 月初から今日まで`;
-    if (!moves.length){ t.innerHTML = `<tbody><tr><td style="color:var(--muted);font-size:13px">まだ記録がありません。体験の申込・体験・入会・退会があった日に「入退会・月次入力」タブの①で記録すると、ここに出ます</td></tr></tbody>`; $('mvDashRate').textContent=''; return; }
+    if (!moves.length){ t.innerHTML = `<tbody><tr><td style="color:var(--muted);font-size:13px">まだ記録がありません。体験の申込・体験・入会・退会があった日に「入退会・チラシ・月次入力」タブの①で記録すると、ここに出ます</td></tr></tbody>`; $('mvDashRate').textContent=''; return; }
     const z = v => v ? num(v) : '<span class="z">0</span>';
     const row = (name, dojo, cls) => { const a=sumMoves(pick(dojo));
       return `<tr class="${cls||''}"><td class="dj"><span class="lg">${esc(name)}</span><span class="sh">${esc(name.replace('道場',''))}</span></td><td class="num">${z(a.apply)}</td><td class="num">${z(a.trial)}</td><td class="num in"><b>${z(a.in)}</b></td>${MV_ROUTES.map(([k])=>`<td class="num rc">${z(a.routes[k])}</td>`).join('')}<td class="num">${a.out?`<span class="neg">${num(a.out)}</span>`:z(0)}</td><td class="num"><b>${a.net?netHtml(a.net):z(0)}</b></td></tr>`; };
-    t.innerHTML = `<thead><tr><th rowspan="2" style="text-align:left">道場</th><th rowspan="2"><span class="lg">体験申込</span><span class="sh">申込</span></th><th rowspan="2">体験</th><th rowspan="2" class="in">入会</th><th colspan="${MV_ROUTES.length}" class="rg">入会の経路</th><th rowspan="2">退会</th><th rowspan="2"><span class="lg">純増減</span><span class="sh">純増</span></th></tr><tr>${MV_ROUTES.map(([,l])=>`<th class="rc">${l}</th>`).join('')}</tr></thead><tbody>` +
+    t.innerHTML = `<thead><tr><th style="text-align:left">道場</th><th><span class="lg">体験申込</span><span class="sh">申込</span></th><th>体験</th><th class="in">入会</th>${MV_ROUTES.map(([,l])=>`<th class="rc">${l}</th>`).join('')}<th>退会</th><th><span class="lg">純増減</span><span class="sh">純増</span></th></tr></thead><tbody>` +
       DOJOS.map(d=>row(d.name,d.id)).join('') + row('合計','','total') + '</tbody>';
     const all = sumMoves(pick('')); const parts=[];
     if (all.trial) parts.push(`体験→入会 ${num(all.in)}／${num(all.trial)}名（${(all.in/all.trial*100).toFixed(0)}%）`);
@@ -2471,6 +2474,7 @@ const API_URL = "https://script.google.com/macros/s/AKfycbziWNY_XnUyTjyz_3PqkA2u
   });
   $('mvListAll').addEventListener('change', renderMovesList);
   $('mvDashSeg').querySelectorAll('button').forEach(b=>b.addEventListener('click', ()=>{ mvDashP=b.dataset.p; renderMovesDash(); }));
+  $('flDashRec').addEventListener('click', ()=>{ showTab('input'); const t=$('flyerInput'); if (t) t.scrollIntoView({block:'start'}); });
   $('mvDashRec').addEventListener('click', ()=>{ showTab('input'); const t=$('mvRecord'); if (t) t.scrollIntoView({block:'start'}); $('mv_date').focus(); });
   $('mvDashGo').addEventListener('click', ()=>{ mvWeek=addDays(weekStart(todayYmd()),-7); showTab('input'); renderMoves(); const t=$('mvWeekly'); if (t) t.scrollIntoView({block:'start'}); });
   $('mvForm').addEventListener('submit', async e => {
@@ -2552,7 +2556,8 @@ const API_URL = "https://script.google.com/macros/s/AKfycbziWNY_XnUyTjyz_3PqkA2u
       ['チラシを見て来た人', `${num(T.join)}<span style="font-size:15px;color:var(--muted)">名 入会</span>`, `体験 ${num(T.trial)}名`+(T.trial?`（体験→入会 ${(T.join/T.trial*100).toFixed(0)}%）`:'')],
       ['反応率（入会 ÷ 配った枚数）', out?((T.join/out*100).toFixed(2)+'%'):'—', `配った枚数 ${num(out)}枚（ポスティング＋道場前）<br>ポスティングの累計 ${fmtHanno(cum.n, cum.ch, true)}`],
     ].map(([l,v,d])=>`<div class="kpi"><div class="l">${l}</div><div class="v num">${v}</div><div class="d num">${d}</div></div>`).join('');
-    const tr = (name,r,cls) => { const o=r.post+r.taken; return `<tr class="${cls||''}"><td><span class="lg">${esc(name)}</span><span class="sh">${esc(name.replace('道場',''))}</span></td><td class="num">${num(r.post)}</td><td class="num">${num(r.added)}</td><td class="num"><b>${num(r.taken)}</b></td><td class="num">${num(r.trial)}</td><td class="num"><b>${num(r.join)}</b></td><td class="num">${o?(r.join/o*100).toFixed(2)+'%':'—'}</td></tr>`; };
+    const zz = v => v ? num(v) : '<span class="z">0</span>';
+    const tr = (name,r,cls) => { const o=r.post+r.taken; return `<tr class="${cls||''}"><td><span class="lg">${esc(name)}</span><span class="sh">${esc(name.replace('道場',''))}</span></td><td class="num">${zz(r.post)}</td><td class="num">${zz(r.added)}</td><td class="num"><b>${zz(r.taken)}</b></td><td class="num">${zz(r.trial)}</td><td class="num"><b>${zz(r.join)}</b></td><td class="num">${o?(r.join/o*100).toFixed(2)+'%':'—'}</td></tr>`; };
     $('flTop').innerHTML = `<thead><tr><th style="text-align:left">道場</th><th>ポスティング</th><th><span class="lg">道場前 補充</span><span class="sh">補充</span></th><th><span class="lg">道場前 持っていかれた</span><span class="sh">持帰</span></th><th><span class="lg">チラシ経由 体験</span><span class="sh">体験</span></th><th><span class="lg">チラシ経由 入会</span><span class="sh">入会</span></th><th>反応率</th></tr></thead><tbody>` +
       rows.map(r=>tr(r.d.name,r)).join('') + tr('合計',T,'total') + '</tbody>';
     $('flTopNote').textContent = 'ポスティング・道場前のチラシと、チラシを見て来た体験・入会。体験は①の記録で経路「チラシ」を選んだ人、入会は月次の新規（チラシ）';
@@ -2602,7 +2607,7 @@ const API_URL = "https://script.google.com/macros/s/AKfycbziWNY_XnUyTjyz_3PqkA2u
     $('flyerList').innerHTML = `<thead><tr><th>配布日</th><th>道場</th><th>枚数</th><th>配布エリア</th><th>地図の町丁目</th><th>配布者</th><th>メモ</th><th>経路</th></tr></thead><tbody>` +
       (sorted.length ? sorted.map(f=>`<tr><td class="num">${esc(f.date)}</td><td>${esc((DOJOS.find(d=>d.id===f.dojo)||{}).name||f.dojo)}</td><td class="num">${num(Number(f.count)||0)}</td><td style="text-align:left;white-space:normal">${esc(f.area)}</td><td style="text-align:left;white-space:normal;font-size:12px">${(()=>{ const d=flyerMap&&flyerMap.describe(f); const nm = d? (d.names.length? esc(d.names.join('、'))+(d.manual?' <span class="chip">手動</span>':'') : '<span style="color:var(--bad)">未割当</span>') : ''; return nm + ` <button type="button" class="ghost" data-fmedit="${esc(f.id)}" style="padding:2px 8px;font-size:11px">地図で指定</button>`; })()}</td><td style="text-align:left">${esc(f.by)}</td><td style="text-align:left;white-space:normal">${esc(f.memo)}</td><td>${f.source==='gform'?`<span class="chip" title="Googleフォームからの報告">フォーム</span> `:''}${f.id?`<button type="button" class="ghost" data-del="${esc(f.id)}" style="padding:4px 10px;font-size:12px">削除</button>`:''}</td></tr>`).join('') : `<tr><td colspan="8" style="text-align:center;color:var(--muted)">まだ報告がありません</td></tr>`) + '</tbody>';
     $('flyerList').querySelectorAll('button[data-fmedit]').forEach(b=>b.addEventListener('click', ()=>{ const fl=flyers.find(x=>x.id===b.dataset.fmedit); if (fl && flyerMap) flyerMap.editFlyer(fl); }));
-    if (flyerMap && !$('tab-flyer').hidden) flyerMap.render();
+    if (flyerMap && !$('tab-input').hidden) flyerMap.render();
     $('flyerList').querySelectorAll('button[data-del]').forEach(b=>b.addEventListener('click', async ()=>{
       if (!confirm('この報告を削除しますか？')) return;
       const id=b.dataset.del;
@@ -3336,7 +3341,7 @@ const API_URL = "https://script.google.com/macros/s/AKfycbziWNY_XnUyTjyz_3PqkA2u
     $('newsTable').querySelectorAll('button[data-ndel]').forEach(b=>b.addEventListener('click', async ()=>{ if(!confirm('この情報を削除しますか？')) return; try { await api.post('deleteNews',{id:b.dataset.ndel}); news=news.filter(n=>n.id!==b.dataset.ndel); renderNews(); } catch(err){ alert(errText(err)); } }));
   }
 
-  function renderAll(){ renderReleaseBanner(); renderDash(); renderMovesDash(); renderMatrix(); renderAiCard(); if(!$('tab-tasks').hidden) renderTaskLineCard(); if(!$('tab-trend').hidden) renderTrend(); if(!$('tab-flyer').hidden) renderFlyers(); if(!$('tab-input').hidden) renderMoves(); }
+  function renderAll(){ renderReleaseBanner(); renderDash(); renderMovesDash(); renderMatrix(); renderAiCard(); if(!$('tab-tasks').hidden) renderTaskLineCard(); if(!$('tab-trend').hidden) renderTrend(); renderFlyers(); if(!$('tab-input').hidden) renderMoves(); }
 
   // ---------- boot ----------
   renderRates(); renderExtras(); renderInstructors(); renderGoals(); loadForm(); renderAll(); renderFlyers();
@@ -3369,20 +3374,20 @@ const API_URL = "https://script.google.com/macros/s/AKfycbziWNY_XnUyTjyz_3PqkA2u
 // ============================================================
 window.helpUI = (function(){
 const HELP_VER='20261018d';
-const TABS=['ダッシュボード','入退会・月次入力','チラシ配布報告','稽古スケジュール','タスク','会議メモ','大会','周辺情報','掲載サイト','Google広告','推移','料金マスタ・目標','使い方'];
+const TABS=['ダッシュボード','入退会・チラシ・月次入力','稽古スケジュール','タスク','会議メモ','大会','周辺情報','掲載サイト','Google広告','推移','料金マスタ・目標','使い方'];
 const k=(key,inner,cls='')=>`<div class="hp-k ${cls}" data-k="${key}">${inner}</div>`;
 const S={
 intro:{tab:-1,h:()=>`<div class="hp-center"><div class="hp-lbl">使い方マニュアル</div><div class="hp-big" style="font-size:22px">塚本道場羅針盤</div>${k('ver','2026-10-18 版')}${k('ch','全12章・章ごとに再生できます')}</div>`},
 login:{tab:-2,h:()=>`<div class="hp-center" style="gap:7px;width:100%">${k('url','tanaka254.github.io/tsukamoto-dojo-report')}<div style="width:80%">${k('pass','<div class="hp-lbl">共通パスコード</div>●●●●')}</div><div style="width:80%">${k('name','<div class="hp-lbl">お名前（変更の記録に使います）</div>田中 新一郎')}</div><div style="width:50%" class="hp-k hp-btn" data-k="open">開く</div></div>`},
 rule:{tab:0,h:()=>`<div class="hp-center">${k('f','<div class="hp-lbl">道場生の数え方</div><div class="hp-big">在籍 − 休会 ＝ 実働会員</div>')}${k('goal','<div class="hp-lbl">本部の目標</div><div class="hp-big">203名 → 303名</div><div class="hp-lbl">2026年7月 → 2027年12月末</div>')}</div>`},
-tabs:{tab:0,h:()=>`${k('tabs','<div class="hp-lbl">タブは13個（右端が使い方）</div>'+TABS.join(' ／ '))}<div class="hp-row">${k('month','<div class="hp-lbl">表示する月</div>2026年9月 ▾')}${k('sync','<div class="hp-lbl">自動同期</div>1分ごと')}</div>${k('hist','<div class="hp-lbl">変更履歴</div>10/06 14:02 田中　月次入力　野沢　在籍 229→231')}${k('rel','更新履歴 <b style="background:#2e7d32;color:#fff;border-radius:9px;padding:0 6px;font-size:10px">NEW</b>　最新 10/18 ▾')}`},
+tabs:{tab:0,h:()=>`${k('tabs','<div class="hp-lbl">タブは12個（右端が使い方）</div>'+TABS.join(' ／ '))}<div class="hp-row">${k('month','<div class="hp-lbl">表示する月</div>2026年9月 ▾')}${k('sync','<div class="hp-lbl">自動同期</div>1分ごと')}</div>${k('hist','<div class="hp-lbl">変更履歴</div>10/06 14:02 田中　月次入力　野沢　在籍 229→231')}${k('rel','更新履歴 <b style="background:#2e7d32;color:#fff;border-radius:9px;padding:0 6px;font-size:10px">NEW</b>　最新 10/18 ▾')}`},
 dash:{tab:0,h:()=>`<div class="hp-row">${['実働会員','新規','退会','退会率'].map((t,i)=>k(i?'':'kpi','<div class="hp-lbl">'+t+'</div><b>—</b>',i?'':'')).join('')}</div>${k('alert','<span class="hp-warn">⚠ 未入力：</span>9月分がまだの道場があります')}${k('grid','<div class="hp-lbl">登録状況（道場×月）</div><div class="hp-grid" style="grid-template-columns:repeat(5,1fr)">'+['','7月','8月','9月','10月','野沢','●','●','●','','用賀','●','●','',''].map(x=>'<div class="hp-cell">'+x+'</div>').join('')+'</div>')}<div class="hp-row">${k('route','<div class="hp-lbl">新規 経路</div>チラシ・紹介・web・SNS・家族兄弟')}${k('route','<div class="hp-lbl">退会 理由</div>引越し・多忙…')}</div>`},
 input:{tab:1,h:()=>`<div class="hp-row">${k('month','<div class="hp-lbl">対象の月</div>2026年9月 ▾')}${k('dojo','<div class="hp-lbl">道場</div>野沢本部 ▾')}</div>${k('zai','<div class="hp-lbl">区分別</div>少年部　在籍 [ 55 ]　休会 [ 2 ]　→ 実働 53')}<div class="hp-row">${k('extra','<div class="hp-lbl">追加クラス</div>エクササイズ [ 6 ]')}${k('flyer','<div class="hp-lbl">チラシ配布枚数</div>[ 空欄でOK ]')}</div><div class="hp-row">${k('new','<div class="hp-lbl">新規・退会</div>上の①で記録（ここでは入れない）')}${k('quit','<div class="hp-lbl">月次入力に入れるもの</div>在籍・休会・追加クラス・チラシ・審査会')}</div><div class="hp-k hp-btn" data-k="save">保存</div>`},
-flyer:{tab:2,h:()=>`${k('form','<div class="hp-lbl">チラシ配布報告フォーム</div>配布日・道場・枚数・配布エリア…')}<div class="hp-row">${k('air','<div class="hp-lbl">道場</div>野沢／用賀／八王子／上野<br><b>エアニックス野沢／エアニックス用賀</b>')}${k('area','<div class="hp-lbl">配布エリア</div>野沢2丁目')}</div>${k('del','<div class="hp-lbl">報告一覧</div>10/02　野沢　500枚　　<span class="hp-warn">削除</span>')}`},
-sched:{tab:3,h:()=>`${k('cfg','<div class="hp-lbl">道場の設定（最初に登録）</div>同時に入れる最大人数 [ 30 ]　／　クラスごとの定員：少年部 20・一般 15')}${k('add','<div class="hp-lbl">コマを追加</div>月曜　17:00〜18:00　少年部　定員20　指導者 ▾')}${k('grid','<div class="hp-grid" style="grid-template-columns:repeat(6,1fr)">'+['月','火','水','木','金','土'].map(d=>'<div class="hp-cell">'+d+'<div class="hp-blk">少年</div></div>').join('')+'</div>')}${k('warn','<span class="hp-warn">⚠ 指導員が重複しています（火 17:00）</span>')}${k('sum','<div class="hp-lbl">指導員別集計</div>齋藤 6コマ ／ 渡辺 4コマ')}`},
-task:{tab:4,h:()=>`${k('name','<div class="hp-lbl">MTG-12</div><b>チラシ改訂案の作成</b>')}<div class="hp-row">${k('st','<div class="hp-lbl">Status</div>進行中 ▾')}${k('done','<div class="hp-lbl">完了にすると</div>進捗 100%・履歴に残る')}</div>${k('warn','<span class="hp-warn">⚠ 他の人が先に変更しています。読み込み直してください</span>')}<div class="hp-k hp-btn" data-k="add">＋タスクを追加</div>${k('line','<div class="hp-lbl">LINE 通知（毎朝8時台）</div>期限超過・3日以内のタスクを担当者へ　／　友だち追加して一言送ると登録')}`},
-tour:{tab:6,h:()=>`${k('list','<div class="hp-lbl">本部大会（毎朝7時台に自動取得）</div><b>第1回中央区空手道錬成大会</b>　11/28')}<div class="hp-row">${k('btn','参加 ／ 保留 ／ 不参加')}${k('cal','📅 理事会カレンダーに登録')}</div>${k('line','<div class="hp-lbl">LINE案内文</div>🟥大会案内<br>⚠️申込期間：〜まで　主管道場：…')}<div class="hp-row">${k('url','申込URL・要項URL（手で貼る）')}${k('redo','この内容で文章を作り直す')}</div>${k('fetch','本部サイトから最新を取得')}`},
-misc:{tab:7,h:()=>`<div class="hp-row">${k('area','<div class="hp-lbl">周辺情報</div>半径1.5km 学校・園・人口')}${k('portal','<div class="hp-lbl">掲載サイト</div>状態・反響（パスワードは書かない）')}</div><div class="hp-row">${k('ads','<div class="hp-lbl">Google広告</div>入会単価 <b style="color:#2e7d32">目標内</b>／<b style="color:#c0261c">超過</b>')}${k('trend','<div class="hp-lbl">推移</div>1年分の表')}</div>${k('price','<div class="hp-lbl">料金マスタ・目標</div>月謝・目標・追加クラス・指導員')}`},
+flyer:{tab:1,h:()=>`${k('form','<div class="hp-lbl">チラシ配布報告フォーム</div>配布日・道場・枚数・配布エリア…')}<div class="hp-row">${k('air','<div class="hp-lbl">道場</div>野沢／用賀／八王子／上野<br><b>エアニックス野沢／エアニックス用賀</b>')}${k('area','<div class="hp-lbl">配布エリア</div>野沢2丁目')}</div>${k('del','<div class="hp-lbl">報告一覧</div>10/02　野沢　500枚　　<span class="hp-warn">削除</span>')}`},
+sched:{tab:2,h:()=>`${k('cfg','<div class="hp-lbl">道場の設定（最初に登録）</div>同時に入れる最大人数 [ 30 ]　／　クラスごとの定員：少年部 20・一般 15')}${k('add','<div class="hp-lbl">コマを追加</div>月曜　17:00〜18:00　少年部　定員20　指導者 ▾')}${k('grid','<div class="hp-grid" style="grid-template-columns:repeat(6,1fr)">'+['月','火','水','木','金','土'].map(d=>'<div class="hp-cell">'+d+'<div class="hp-blk">少年</div></div>').join('')+'</div>')}${k('warn','<span class="hp-warn">⚠ 指導員が重複しています（火 17:00）</span>')}${k('sum','<div class="hp-lbl">指導員別集計</div>齋藤 6コマ ／ 渡辺 4コマ')}`},
+task:{tab:3,h:()=>`${k('name','<div class="hp-lbl">MTG-12</div><b>チラシ改訂案の作成</b>')}<div class="hp-row">${k('st','<div class="hp-lbl">Status</div>進行中 ▾')}${k('done','<div class="hp-lbl">完了にすると</div>進捗 100%・履歴に残る')}</div>${k('warn','<span class="hp-warn">⚠ 他の人が先に変更しています。読み込み直してください</span>')}<div class="hp-k hp-btn" data-k="add">＋タスクを追加</div>${k('line','<div class="hp-lbl">LINE 通知（毎朝8時台）</div>期限超過・3日以内のタスクを担当者へ　／　友だち追加して一言送ると登録')}`},
+tour:{tab:5,h:()=>`${k('list','<div class="hp-lbl">本部大会（毎朝7時台に自動取得）</div><b>第1回中央区空手道錬成大会</b>　11/28')}<div class="hp-row">${k('btn','参加 ／ 保留 ／ 不参加')}${k('cal','📅 理事会カレンダーに登録')}</div>${k('line','<div class="hp-lbl">LINE案内文</div>🟥大会案内<br>⚠️申込期間：〜まで　主管道場：…')}<div class="hp-row">${k('url','申込URL・要項URL（手で貼る）')}${k('redo','この内容で文章を作り直す')}</div>${k('fetch','本部サイトから最新を取得')}`},
+misc:{tab:6,h:()=>`<div class="hp-row">${k('area','<div class="hp-lbl">周辺情報</div>半径1.5km 学校・園・人口')}${k('portal','<div class="hp-lbl">掲載サイト</div>状態・反響（パスワードは書かない）')}</div><div class="hp-row">${k('ads','<div class="hp-lbl">Google広告</div>入会単価 <b style="color:#2e7d32">目標内</b>／<b style="color:#c0261c">超過</b>')}${k('trend','<div class="hp-lbl">推移</div>1年分の表')}</div>${k('price','<div class="hp-lbl">料金マスタ・目標</div>月謝・目標・追加クラス・指導員')}`},
 moves:{tab:1,h:()=>`${k('rec','<div class="hp-lbl">① 入会・退会を記録する（入力はここだけ）</div>10/14（火）　野沢　入会　少年部　経路［チラシ・紹介・web・SNS・家族兄弟］　1人　［記録する］')}<div class="hp-row">${k('week','<div class="hp-lbl">② 週ごとの集計（月〜日）</div>◀ 前の週　<b>先週</b>　今週　次の週 ▶')}${k('dash','<div class="hp-lbl">ダッシュボード</div>先週・今週の入退会')}</div>${k('auto','<div class="hp-lbl">③ 月次入力へ自動で反映</div>新規・退会と内訳　／　記録一覧から削除できます')}`},
 ai:{tab:0,h:()=>`${k('ask','<div class="hp-lbl">AI に聞く</div>［先週の入会・退会はどうだった？］［303名まであと何名？］<br><span style="font-size:12px">答え：先週は入会3名・退会1名…（根拠：10/12〜10/18 野沢）</span>')}<div class="hp-row">${k('voice','<div class="hp-lbl">声で聞く</div>🎤 話す　／　☑ 回答を読み上げる')}${k('lim','<div class="hp-lbl">回数の上限</div>1人1日10回・全員で月300回')}${k('sum','<div class="hp-lbl">要約・理事会コメント案</div>田中・石川のみ')}</div>`},
 flow:{tab:0,h:()=>`${k('dojo','<b>道場主</b>　入会・退会はその日に①で記録／月末に在籍・休会を③月次入力／チラシ報告')}${k('mon','<b>毎週月曜</b>　定例ミーティングで先週の入退会を確認')}${k('office','<b>事務局</b>　未入力アラートを見て声かけ')}${k('board','<b>理事</b>　進捗確認・大会判断・タスク更新')}`},
@@ -3417,8 +3422,8 @@ function seg(id,pred,label){const i=chIdx(id);if(i<0)return null;const c=CH[i];
 const short=id=>{const c=CH[chIdx(id)];return c?c.title:''};
 const PAGE={
  dash:()=>[seg('03',q=>q.s==='dash',short('03')+'（ダッシュボードの部分）'),seg('10')],
- input:()=>[seg('04'),seg('03',q=>q.s==='input',short('03')+'（月次入力の部分）')],
- flyer:()=>[seg('05')], sched:()=>[seg('06')], tasks:()=>[seg('07',q=>q.h!=='mtg',short('07'))], mtg:()=>[seg('07',q=>q.h==='mtg',short('07')+'（会議メモ）')], tour:()=>[seg('08')],
+ input:()=>[seg('04'),seg('05'),seg('03',q=>q.s==='input',short('03')+'（月次入力の部分）')],
+ sched:()=>[seg('06')], tasks:()=>[seg('07',q=>q.h!=='mtg',short('07'))], mtg:()=>[seg('07',q=>q.h==='mtg',short('07')+'（会議メモ）')], tour:()=>[seg('08')],
  news:()=>[seg('09',q=>q.h==='area',short('09')+'（周辺情報）')], portal:()=>[seg('09',q=>q.h==='portal',short('09')+'（掲載サイト）')],
  ads:()=>[seg('09',q=>q.h==='ads',short('09')+'（Google広告）')], trend:()=>[seg('09',q=>q.h==='trend',short('09')+'（推移）')],
  rates:()=>[seg('09',q=>q.h==='price',short('09')+'（料金マスタ・目標）')]
